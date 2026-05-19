@@ -32,6 +32,8 @@ model User {
   userAchievements  UserAchievement[]
   userPoints        UserPoint[]
   refreshTokens     RefreshToken[]
+  postureAssessments       PostureAssessment[]
+  postureCorrectionPlans   PostureCorrectionPlan[]
 }
 
 model BodyRecord {
@@ -237,21 +239,28 @@ model RefreshToken {
 
 // ========== 体态矫正 ==========
 model PostureAssessment {
-  id             Int      @id @default(autoincrement())
-  userId         Int
-  assessmentDate DateTime @db.Date
-  postureType    String   @db.VarChar(64)
-  severity       String   @db.VarChar(16)
-  testDataJson   String?  @db.Text
+  id              Int                      @id @default(autoincrement())
+  userId          Int
+  user            User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assessmentDate  DateTime                 @db.Date
+  postureType     String                   @db.VarChar(64)
+  severity        String                   @db.VarChar(16)
+  testDataJson    String?                  @db.Text
+  imageUrl        String?                  @db.VarChar(500)
+  status          String                   @default("pending") @db.VarChar(20)
+  correctionPlans PostureCorrectionPlan[]
 }
 
 model PostureCorrectionPlan {
-  id              Int      @id @default(autoincrement())
+  id              Int                @id @default(autoincrement())
+  userId          Int
+  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   assessmentId    Int
-  exerciseName    String   @db.VarChar(128)
-  frequency       String   @db.VarChar(64)
+  assessment      PostureAssessment  @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  exerciseName    String             @db.VarChar(128)
+  frequency       String             @db.VarChar(64)
   durationMinutes Int
-  videoUrl        String?  @db.VarChar(512)
-  imageUrl        String?  @db.VarChar(512)
-  notes           String?  @db.Text
+  videoUrl        String?            @db.VarChar(512)
+  imageUrl        String?            @db.VarChar(512)
+  notes           String?            @db.Text
 }
