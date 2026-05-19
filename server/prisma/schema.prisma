@@ -1,0 +1,257 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ========== 用户相关 ==========
+model User {
+  id          Int      @id @default(autoincrement())
+  openid      String   @unique @db.VarChar(64)
+  unionid     String?  @db.VarChar(64)
+  nickname    String   @default("用户") @db.VarChar(64)
+  avatarUrl   String?  @db.Text
+  phone       String?  @db.VarChar(20)
+  gender      Int      @default(0)
+  birthday    DateTime? @db.Date
+  height      Float?
+  weight      Float?
+  fitnessGoal String   @default("muscle_gain") @db.VarChar(32)
+  restSeconds Int      @default(60)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  bodyRecords       BodyRecord[]
+  userTrainingPlans UserTrainingPlan[]
+  dailyCheckins     DailyCheckin[]
+  dietRecords       DietRecord[]
+  dietPlans         DietPlan[]
+  userAchievements  UserAchievement[]
+  userPoints        UserPoint[]
+  refreshTokens     RefreshToken[]
+}
+
+model BodyRecord {
+  id               Int      @id @default(autoincrement())
+  userId           Int
+  user             User     @relation(fields: [userId], references: [id])
+  weight           Float
+  bodyFatPct       Float?
+  muscleMassKg     Float?
+  flexibilityScore Float?
+  chest           Float?
+  waist           Float?
+  hip             Float?
+  bmi              Float?
+  recordDate       DateTime @db.Date
+  createdAt        DateTime @default(now())
+
+  @@index([userId, recordDate])
+}
+
+// ========== 训练相关 ==========
+model TrainingPlan {
+  id            Int          @id @default(autoincrement())
+  name          String       @db.VarChar(128)
+  category      String       @db.VarChar(32)
+  creator       String       @default("系统") @db.VarChar(64)
+  durationWeeks Int          @default(4)
+  difficulty    Int          @default(1)
+  description   String?      @db.Text
+  coverImage    String?      @db.VarChar(512)
+  cycleDays     Int          @default(7)
+
+  trainingDays      TrainingDay[]
+  userTrainingPlans UserTrainingPlan[]
+}
+
+model TrainingDay {
+  id        Int         @id @default(autoincrement())
+  planId    Int
+  plan      TrainingPlan @relation(fields: [planId], references: [id])
+  dayNumber Int
+  dayName   String      @default("Day 1") @db.VarChar(32)
+  exercises Exercise[]
+
+  @@unique([planId, dayNumber])
+}
+
+model Exercise {
+  id            Int         @id @default(autoincrement())
+  trainingDayId Int
+  trainingDay   TrainingDay @relation(fields: [trainingDayId], references: [id])
+  exerciseName  String      @db.VarChar(128)
+  sets          Int         @default(3)
+  reps          Int         @default(12)
+  restSeconds   Int         @default(60)
+  videoUrl      String?     @db.VarChar(512)
+  imageUrl      String?     @db.VarChar(512)
+  description   String?     @db.Text
+  sortOrder     Int         @default(0)
+
+  @@index([trainingDayId])
+}
+
+model UserTrainingPlan {
+  id              Int          @id @default(autoincrement())
+  userId          Int
+  user            User         @relation(fields: [userId], references: [id])
+  planId          Int
+  plan            TrainingPlan @relation(fields: [planId], references: [id])
+  startDate       DateTime     @db.Date
+  endDate         DateTime     @db.Date
+  goalDescription String?      @db.Text
+  targetWeight    Float?
+  status          String       @default("active") @db.VarChar(16)
+  createdAt       DateTime     @default(now())
+
+  @@index([userId, status])
+}
+
+model DailyCheckin {
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  user            User     @relation(fields: [userId], references: [id])
+  planId          Int?
+  exerciseId      Int?
+  trainingDayId   Int?
+  checkinDate     DateTime @db.Date
+  completedSets   Int      @default(0)
+  completedReps   Int      @default(0)
+  durationMinutes Int      @default(0)
+  feelingRating   Int      @default(3)
+  notes           String?  @db.Text
+  createdAt       DateTime @default(now())
+  exerciseLogs    ExerciseLog[]
+
+  @@index([userId, checkinDate])
+}
+
+model ExerciseLog {
+  id         Int          @id @default(autoincrement())
+  checkinId  Int
+  checkin    DailyCheckin @relation(fields: [checkinId], references: [id])
+  exerciseId Int
+  setNumber  Int          @default(1)
+  weight     Float?
+  reps       Int          @default(0)
+  completed  Boolean      @default(true)
+
+  @@index([checkinId])
+}
+
+// ========== 饮食相关 ==========
+model FoodDatabase {
+  id              Int    @id @default(autoincrement())
+  foodName        String @db.VarChar(128)
+  category        String @db.VarChar(32)
+  caloriesPer100g Float
+  proteinG        Float  @default(0)
+  fatG            Float  @default(0)
+  carbsG          Float  @default(0)
+  servingUnit     String @default("g") @db.VarChar(16)
+  dietRecords     DietRecord[]
+
+  @@index([foodName])
+}
+
+model DietRecord {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  user          User     @relation(fields: [userId], references: [id])
+  foodId        Int
+  food          FoodDatabase @relation(fields: [foodId], references: [id])
+  servingAmount Float    @default(100)
+  mealType      String   @db.VarChar(16)
+  recordDate    DateTime @db.Date
+  createdAt     DateTime @default(now())
+
+  @@index([userId, recordDate, mealType])
+}
+
+model DietPlan {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  user           User     @relation(fields: [userId], references: [id])
+  goal           String   @db.VarChar(32)
+  dailyCalories  Int
+  proteinTargetG Float
+  fatTargetG     Float
+  carbsTargetG   Float
+  startDate      DateTime @db.Date
+  endDate        DateTime @db.Date
+  createdAt      DateTime @default(now())
+
+  @@index([userId])
+}
+
+// ========== 成就系统 ==========
+model Achievement {
+  id             Int    @id @default(autoincrement())
+  name           String @db.VarChar(64)
+  description    String @db.VarChar(256)
+  icon           String @db.VarChar(32)
+  conditionType  String @db.VarChar(32)
+  conditionValue Int    @default(1)
+
+  userAchievements UserAchievement[]
+}
+
+model UserAchievement {
+  id            Int         @id @default(autoincrement())
+  userId        Int
+  user          User        @relation(fields: [userId], references: [id])
+  achievementId Int
+  achievement   Achievement @relation(fields: [achievementId], references: [id])
+  unlockedAt    DateTime    @default(now())
+
+  @@unique([userId, achievementId])
+}
+
+model UserPoint {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  points    Int
+  reason    String   @db.VarChar(64)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+// ========== 认证 ==========
+model RefreshToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique @db.VarChar(128)
+  expiresAt DateTime
+  revoked   Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+// ========== 体态矫正 ==========
+model PostureAssessment {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  assessmentDate DateTime @db.Date
+  postureType    String   @db.VarChar(64)
+  severity       String   @db.VarChar(16)
+  testDataJson   String?  @db.Text
+}
+
+model PostureCorrectionPlan {
+  id              Int      @id @default(autoincrement())
+  assessmentId    Int
+  exerciseName    String   @db.VarChar(128)
+  frequency       String   @db.VarChar(64)
+  durationMinutes Int
+  videoUrl        String?  @db.VarChar(512)
+  imageUrl        String?  @db.VarChar(512)
+  notes           String?  @db.Text
+}
