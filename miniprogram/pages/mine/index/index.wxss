@@ -1,0 +1,26 @@
+.user-header { display: flex; align-items: center; }
+.avatar { width: 120rpx; height: 120rpx; border-radius: 50%; box-shadow: 0 0 0 6rpx rgba(26,86,219,0.15), 0 4rpx 20rpx rgba(26,86,219,0.2); }
+.login-btn { background: var(--primary); color: #FFF; }
+
+.menu-item { margin-bottom: 2rpx; }
+.menu-icon { margin-right: var(--spacing-sm); }
+
+.logout-btn { color: var(--danger); background: transparent; border: 1rpx solid var(--danger); width: 60%; }
+.logout-btn:active { background: var(--danger-light); }
+
+.privacy-agree {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16rpx 0;
+  font-size: 24rpx;
+  color: #666;
+  flex-wrap: wrap;
+}
+.privacy-agree checkbox {
+  transform: scale(0.7);
+  margin-right: 8rpx;
+}
+.privacy-agree .link {
+  color: #1A56DB;
+}

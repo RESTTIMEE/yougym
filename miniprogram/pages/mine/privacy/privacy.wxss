@@ -1,0 +1,33 @@
+.container {
+  padding: 32rpx;
+  line-height: 1.8;
+  font-size: 28rpx;
+  color: #333;
+}
+.title {
+  font-size: 36rpx;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12rpx;
+}
+.update-date {
+  text-align: center;
+  color: #999;
+  margin-bottom: 32rpx;
+}
+.section {
+  margin-bottom: 32rpx;
+}
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+.section-body {
+  margin-bottom: 8rpx;
+}
+.list-item {
+  padding-left: 24rpx;
+  margin-bottom: 6rpx;
+  color: #555;
+}

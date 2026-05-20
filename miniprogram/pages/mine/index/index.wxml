@@ -1,0 +1,42 @@
+<view class="page-container">
+  <!-- 用户信息区 -->
+  <view class="user-header card">
+    <image class="avatar" src="{{user.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+    <view class="user-info flex-1" wx:if="{{isLogin}}">
+      <text class="text-bold text-lg">{{user.nickname}}</text>
+      <text class="text-hint text-sm">健身目标: {{user.fitnessGoal}}</text>
+    </view>
+    <button class="login-btn" wx:if="{{!isLogin}}" size="mini" bind:tap="onLogin">微信登录</button>
+  </view>
+
+  <!-- 隐私同意 -->
+  <view class="privacy-agree" wx:if="{{!isLogin}}">
+    <checkbox checked="{{privacyAgreed}}" bindchange="togglePrivacy" />
+    <text>我已阅读并同意</text>
+    <text class="link" bindtap="goPrivacy">《隐私政策》</text>
+    <text>和</text>
+    <text class="link" bindtap="goAgreement">《用户服务协议》</text>
+  </view>
+
+  <!-- 菜单 -->
+  <view class="menu-list mt-lg">
+    <view
+      wx:for="{{menuItems}}"
+      wx:key="key"
+      class="menu-item card flex-between scale-active"
+      data-url="{{item.url}}"
+      bind:tap="onMenuItemTap"
+    >
+      <view>
+        <text class="menu-icon">{{item.icon}}</text>
+        <text>{{item.label}}</text>
+      </view>
+      <text class="arrow">⟩</text>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="mt-lg text-center" wx:if="{{isLogin}}">
+    <button class="logout-btn" bind:tap="onLogout">退出登录</button>
+  </view>
+</view>

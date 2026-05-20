@@ -1,0 +1,41 @@
+<view class="container">
+  <view class="title">优健隐私政策</view>
+  <view class="update-date">更新日期：2026年5月20日</view>
+  <view class="section">
+    <view class="section-title">1. 信息收集</view>
+    <view class="section-body">优健（以下简称"我们"）仅收集为您提供健身服务所必需的信息，包括：</view>
+    <view class="list-item">微信授权信息（昵称、头像）</view>
+    <view class="list-item">您主动填写的身体数据（身高、体重、健身目标）</view>
+    <view class="list-item">训练记录与饮食记录</view>
+    <view class="list-item">体态评估上传的图片</view>
+  </view>
+  <view class="section">
+    <view class="section-title">2. 信息使用</view>
+    <view class="section-body">收集的信息仅用于：</view>
+    <view class="list-item">生成个性化训练计划与饮食建议</view>
+    <view class="list-item">提供体态评估与矫正方案</view>
+    <view class="list-item">展示训练数据看板与进度报告</view>
+    <view class="list-item">改善服务质量与用户体验</view>
+  </view>
+  <view class="section">
+    <view class="section-title">3. 信息安全</view>
+    <view class="section-body">我们采用加密传输（HTTPS）、访问控制等措施保护您的数据。所有数据存储于受控服务器，未经授权人员不得访问。</view>
+  </view>
+  <view class="section">
+    <view class="section-title">4. 第三方服务</view>
+    <view class="section-body">本应用使用以下第三方服务：</view>
+    <view class="list-item">微信登录 — 用于账号认证</view>
+    <view class="list-item">DeepSeek AI — 用于生成训练与饮食建议</view>
+    <view class="list-item">阿里云 OSS — 用于图片存储</view>
+    <view class="section-body">第三方服务各自有其隐私政策，建议您一并阅读。</view>
+  </view>
+  <view class="section">
+    <view class="section-title">5. 您的权利</view>
+    <view class="section-body">您有权查阅、更正或删除您的个人数据。如需行使上述权利，请通过「我的 → 关于」页面联系开发者。</view>
+  </view>
+  <view class="section">
+    <view class="section-title">6. 联系我们</view>
+    <view class="section-body">如对本隐私政策有任何疑问，请通过以下方式联系：</view>
+    <view class="list-item">邮箱：yougym@example.com</view>
+  </view>
+</view>

@@ -1,0 +1,87 @@
+<view class="page-container">
+  <!-- 顶部问候 -->
+  <view class="header-card card">
+    <view class="header-row">
+      <image wx:if="{{userAvatar}}" class="header-avatar" src="{{userAvatar}}" mode="aspectFill" />
+      <view>
+        <view class="text-lg">{{greeting}}，{{userNickname}}</view>
+        <view class="header-subtitle mt-sm">准备好今天的训练了吗？</view>
+      </view>
+    </view>
+    <view class="header-stats">
+      <view class="header-stat">
+        <text class="header-stat-num">{{totalDays}}</text>
+        <text class="header-stat-label">训练天数</text>
+      </view>
+      <view class="header-stat-divider"></view>
+      <view class="header-stat">
+        <text class="header-stat-num">{{streakDays}}</text>
+        <text class="header-stat-label">连续天数</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 登录授权 -->
+  <view class="login-section" wx:if="{{showLogin}}">
+    <view class="card login-card">
+      <view class="login-title">登录优健</view>
+      <view class="login-desc">登录后可同步训练数据，获取个性化建议</view>
+      <view class="privacy-agree">
+        <checkbox checked="{{privacyAgreed}}" bindchange="togglePrivacy" />
+        <text>我已阅读并同意</text>
+        <text class="link" bindtap="goPrivacy">《隐私政策》</text>
+        <text>和</text>
+        <text class="link" bindtap="goAgreement">《用户服务协议》</text>
+      </view>
+      <button class="login-btn scale-active" bindtap="onLogin" type="primary">微信一键登录</button>
+    </view>
+  </view>
+
+  <!-- 训练概览 -->
+  <view class="card" wx:elif="{{!isLoading}}">
+    <view class="flex-between">
+      <text class="text-bold">训练概览</text>
+    </view>
+    <view class="stats-row mt-md">
+      <view class="stat-item">
+        <text class="stat-num">{{avgDuration}}</text>
+        <text class="stat-label">平均分钟/天</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num">{{latestRecord ? latestRecord.weight : '--'}}</text>
+        <text class="stat-label">最新体重</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="quick-actions mt-lg">
+    <view class="action-btn scale-active" bind:tap="goToTrain">
+      <text class="action-icon">🏋️</text>
+      <text>开始训练</text>
+    </view>
+    <view class="action-btn scale-active" bind:tap="goToData">
+      <text class="action-icon">📊</text>
+      <text>数据看板</text>
+    </view>
+  </view>
+
+  <!-- 加载骨架 -->
+  <view wx:if="{{isLoading}}" class="p-md">
+    <skeleton type="card"></skeleton>
+    <view class="mt-md"></view>
+    <skeleton type="list"></skeleton>
+  </view>
+
+  <!-- AI快捷入口 -->
+  <view class="quick-entry">
+    <view class="entry-card scale-active" bindtap="onAiAdvice">
+      <text class="entry-icon">🤖</text>
+      <text class="entry-label">AI建议</text>
+    </view>
+    <view class="entry-card scale-active" bindtap="onPosture">
+      <text class="entry-icon">🧍</text>
+      <text class="entry-label">体态评估</text>
+    </view>
+  </view>
+</view>
