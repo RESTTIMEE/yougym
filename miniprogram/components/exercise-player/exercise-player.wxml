@@ -1,0 +1,17 @@
+<view class="player">
+  <video
+    wx:if="{{isVideo && videoUrl}}"
+    src="{{videoUrl}}"
+    autoplay="{{autoPlay}}"
+    controls
+    object-fit="contain"
+  ></video>
+  <image
+    wx:else
+    src="{{imageUrl}}"
+    mode="aspectFit"
+    binderror="onImageError"
+    class="player-image"
+    lazy-load
+  ></image>
+</view>

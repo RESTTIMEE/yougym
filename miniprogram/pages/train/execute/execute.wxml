@@ -1,0 +1,165 @@
+<view class="page-container">
+  <!-- 训练日选择条 -->
+  <view class="day-bar">
+    <view class="day-bar-left">
+      <view class="day-bar-line" style="background:{{currentDay ? 'var(--accent)' : 'var(--border)'}}"></view>
+      <view>
+        <text class="day-bar-name">{{currentDay ? currentDay.dayName : '自由训练'}}</text>
+        <text wx:if="{{currentDay}}" class="day-bar-meta">周期第{{currentDay.dayNumber}}天</text>
+      </view>
+    </view>
+    <view class="day-bar-switch {{showDayPanel ? 'active' : ''}}" bindtap="onToggleDayPanel">切换 ▾</view>
+  </view>
+
+  <!-- 切换面板 -->
+  <view wx:if="{{showDayPanel}}" class="day-panel fade-in">
+    <view wx:for="{{trainingDays}}" wx:key="id"
+      class="day-panel-item {{item.dayNumber === currentDay.dayNumber ? 'active' : ''}}"
+      data-day-number="{{item.dayNumber}}"
+      bindtap="onSelectDay">
+      <text>Day {{item.dayNumber}} · {{item.dayName}}</text>
+      <text wx:if="{{item.dayNumber === currentDay.dayNumber}}" class="text-xs" style="color:var(--primary)">当前</text>
+    </view>
+  </view>
+
+  <!-- 当前动作展示 -->
+  <view wx:if="{{currentExercise}}" class="exercise-card card">
+    <image wx:if="{{currentExercise.imageUrl}}" src="{{currentExercise.imageUrl}}" class="exercise-img" mode="aspectFit" lazy-load />
+    <view class="exercise-info">
+      <text class="text-bold text-xl">{{currentExercise.exerciseName}}</text>
+      <text class="text-hint text-sm mt-xs">{{currentExercise.sets}}组 × {{currentExercise.reps}}次</text>
+    </view>
+
+    <!-- 组数进度指示器 -->
+    <view class="set-progress">
+      <view
+        wx:for="{{currentExercise.sets}}"
+        wx:key="*this"
+        class="set-dot {{currentSet > item ? 'done' : ''}} {{currentSet === item && !completed ? 'current' : ''}}"
+      >
+        <text class="set-dot-num">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 当前组重量/次数录入 -->
+    <view wx:if="{{!completed}}" class="set-inputs">
+      <view class="input-group">
+        <text class="input-label">重量 (kg)</text>
+        <view class="input-row">
+          <view class="adj-btn" data-delta="{{-2.5}}" bindtap="adjustWeight">−</view>
+          <input
+            class="num-input"
+            type="digit"
+            value="{{setWeight}}"
+            bindinput="onWeightInput"
+            placeholder="0"
+          />
+          <view class="adj-btn" data-delta="{{2.5}}" bindtap="adjustWeight">+</view>
+        </view>
+      </view>
+      <view class="input-group">
+        <text class="input-label">次数</text>
+        <view class="input-row">
+          <view class="adj-btn" data-delta="{{-1}}" bindtap="adjustReps">−</view>
+          <input
+            class="num-input"
+            type="number"
+            value="{{setReps}}"
+            bindinput="onRepsInput"
+            placeholder="{{currentExercise.reps}}"
+          />
+          <view class="adj-btn" data-delta="{{1}}" bindtap="adjustReps">+</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 已完成组的历史记录 -->
+    <view wx:if="{{setLogs.length > 0 && !completed}}" class="set-history">
+      <text class="text-hint text-sm">已完成:</text>
+      <view class="history-tags">
+        <view wx:for="{{setLogs}}" wx:key="setNumber" wx:if="{{item.exerciseId === currentExercise.id}}" class="history-tag">
+          <text>{{item.setNumber}}组 {{item.reps}}次{{item.weight ? ' · ' + item.weight + 'kg' : ''}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 训练计时器 -->
+  <view wx:if="{{!isResting && !completed}}" class="timer-section text-center">
+    <text class="timer-text {{isRunning ? 'running' : ''}}">{{timerSeconds}}s</text>
+    <text class="text-hint">训练中</text>
+  </view>
+
+  <!-- 休息倒计时 -->
+  <view wx:if="{{isResting}}" class="rest-section text-center">
+    <view class="rest-ring">
+      <view class="rest-ring-inner">
+        <text class="rest-remaining">{{restRemaining}}</text>
+        <text class="rest-unit">s</text>
+      </view>
+    </view>
+    <text class="rest-label">休息中</text>
+    <view class="rest-adjust">
+      <view class="rest-adj-btn" data-delta="{{-10}}" bindtap="adjustRest">-10s</view>
+      <view class="rest-skip-btn" bindtap="skipRest">跳过</view>
+      <view class="rest-adj-btn" data-delta="{{10}}" bindtap="adjustRest">+10s</view>
+    </view>
+  </view>
+
+  <!-- 操作按钮区 -->
+  <view wx:if="{{!completed}}" class="action-section">
+    <view wx:if="{{!isRunning && !isResting}}" class="btn btn-primary scale-active" bindtap="startTimer">开始计时</view>
+    <view wx:if="{{isRunning}}" class="btn btn-primary scale-active" bindtap="completeSet">
+      完成第{{currentSet}}组 ({{currentSet}}/{{currentExercise.sets}})
+    </view>
+  </view>
+
+  <!-- 训练完成 -->
+  <view wx:if="{{completed}}" class="completion-section">
+    <view class="complete-badge">训练完成</view>
+
+    <!-- 本日训练汇总 -->
+    <view class="summary-card card">
+      <text class="section-title">训练汇总</text>
+      <view class="summary-row">
+        <text class="text-hint">总组数</text>
+        <text class="text-bold">{{setLogs.length}} 组</text>
+      </view>
+      <view class="summary-row">
+        <text class="text-hint">训练时长</text>
+        <text class="text-bold">{{timerSeconds}}s ({{timerMinutes}}分钟)</text>
+      </view>
+      <view wx:for="{{exercises}}" wx:for-item="ex" wx:key="id" class="summary-exercise">
+        <text class="text-bold">{{ex.exerciseName}}</text>
+        <view class="summary-sets">
+          <text wx:for="{{setLogs}}" wx:for-item="log" wx:key="setNumber" wx:if="{{log.exerciseId === ex.id}}" class="text-hint text-sm">
+            {{log.setNumber}}组: {{log.reps}}次{{log.weight ? ' · ' + log.weight + 'kg' : ''}}
+          </text>
+        </view>
+      </view>
+    </view>
+
+    <text class="section-title text-center mt-lg">训练感受</text>
+    <view class="feeling-stars">
+      <text
+        wx:for="{{[1,2,3,4,5]}}"
+        wx:key="*this"
+        class="feeling-star {{feelingRating >= item ? 'active' : ''}}"
+        data-rating="{{item}}"
+        bindtap="onFeelingTap"
+      >{{feelingRating >= item ? '★' : '☆'}}</text>
+    </view>
+    <view class="notes-wrap mt-md">
+      <input class="notes-input" placeholder="记录训练感受..." value="{{notes}}" bindinput="onNotesInput" />
+    </view>
+    <view class="btn btn-accent scale-active mt-lg" bindtap="finishTraining">完成打卡</view>
+  </view>
+
+  <!-- 整体进度 -->
+  <view class="bottom-progress">
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{completedList.length / exercises.length * 100}}%"></view>
+    </view>
+    <text class="text-hint text-sm text-center">{{completedList.length}}/{{exercises.length}} 动作完成</text>
+  </view>
+</view>

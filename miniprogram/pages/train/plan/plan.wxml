@@ -1,0 +1,18 @@
+<view class="page-container">
+  <view
+    wx:for="{{plans}}"
+    wx:key="id"
+    class="plan-card card"
+    data-id="{{item.id}}"
+    bind:tap="onPlanTap"
+  >
+    <image src="{{item.coverImage}}" class="plan-cover" mode="aspectFill" lazy-load />
+    <view class="plan-info">
+      <text class="text-bold text-lg">{{item.name}}</text>
+      <text class="text-hint text-sm mt-sm">{{item.creator}} · {{item.durationWeeks}}周</text>
+      <text class="text-hint text-sm">{{item.description}}</text>
+    </view>
+  </view>
+  <view class="loading-more" wx:if="{{isLoading}}">加载中...</view>
+  <view class="empty-state" wx:if="{{!isLoading && plans.length === 0}}">暂无计划</view>
+</view>

@@ -1,0 +1,75 @@
+<view class="page-container">
+  <!-- 三大板块选择 -->
+  <view class="category-section">
+    <view
+      wx:for="{{categories}}"
+      wx:key="key"
+      class="category-card card scale-active"
+      style="border-left: 6rpx solid {{item.key === 'muscle_gain' ? 'var(--primary)' : (item.key === 'fat_loss' ? 'var(--accent)' : 'var(--success)')}}"
+      data-key="{{item.key}}"
+      bind:tap="onCategoryTap"
+    >
+      <text class="category-icon">{{item.icon}}</text>
+      <view class="category-info">
+        <text class="text-bold text-lg">{{item.name}}</text>
+        <text class="text-hint text-sm">{{item.desc}}</text>
+      </view>
+      <text class="arrow">→</text>
+    </view>
+  </view>
+
+  <!-- 今日训练 -->
+  <view wx:if="{{todayTraining && isLogin}}" class="today-bar card scale-active" bindtap="onTodayTap">
+    <view class="today-left">
+      <text class="today-label">今日训练</text>
+      <text class="today-name">{{todayTraining.dayName}}</text>
+      <text class="text-hint text-sm">{{todayTraining.planName}} · Day {{todayTraining.dayNumber}}</text>
+    </view>
+    <text class="arrow">-></text>
+  </view>
+
+  <!-- 训练热力图 -->
+  <view class="heatmap-section">
+    <text class="text-bold p-md">训练记录</text>
+    <heatmap checkins="{{yearCheckins}}" year="{{heatmapYear}}" bind:yearchange="onHeatmapYearChange" />
+  </view>
+
+  <!-- 骨架加载 -->
+  <view wx:if="{{loading}}" class="p-md">
+    <skeleton type="card"></skeleton>
+    <view class="mt-md"></view>
+    <skeleton type="list"></skeleton>
+  </view>
+
+  <!-- 热门计划 -->
+  <view wx:else class="hot-plans mt-lg">
+    <text class="text-bold p-md">热门训练计划</text>
+    <view
+      wx:for="{{hotPlans}}"
+      wx:key="id"
+      class="plan-card card"
+      data-id="{{item.id}}"
+      bind:tap="onPlanTap"
+    >
+      <image src="{{item.coverImage}}" class="plan-cover" mode="aspectFill" lazy-load />
+      <view class="plan-meta">
+        <view class="flex-between">
+          <text class="text-bold">{{item.name}}</text>
+          <text class="difficulty-badge d{{item.difficulty}}">{{item.difficulty === 3 ? '进阶' : (item.difficulty === 2 ? '中级' : '入门')}}</text>
+        </view>
+        <text class="text-hint text-sm">{{item.creator}} · {{item.durationWeeks}}周</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && hotPlans.length === 0}}">
+    <text>暂无热门计划</text>
+  </view>
+
+  <view class="create-entry mt-lg p-md">
+    <button class="create-btn scale-active" bindtap="onCreatePlan">+ 创建自定义计划</button>
+    <view class="mt-md"></view>
+    <button class="history-btn scale-active" bindtap="onGoHistory">查看训练记录</button>
+  </view>
+</view>

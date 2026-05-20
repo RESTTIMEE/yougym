@@ -1,0 +1,53 @@
+<view class="page-container">
+  <!-- 计划信息 -->
+  <view class="plan-header card">
+    <view class="cover-wrap">
+      <image src="{{plan.coverImage}}" class="plan-cover" mode="aspectFill" lazy-load />
+      <view class="cover-gradient"></view>
+      <view class="cover-tag">{{plan.difficulty === 3 ? '进阶' : (plan.difficulty === 2 ? '中级' : '入门')}}</view>
+    </view>
+    <view class="plan-meta p-md">
+      <text class="text-bold text-xl">{{plan.name}}</text>
+      <text class="text-hint mt-sm">{{plan.creator}} · {{plan.durationWeeks}}周 · {{plan.cycleDays}}天周期</text>
+    </view>
+  </view>
+
+  <!-- 训练日手风琴列表 -->
+  <view class="day-list mt-lg">
+    <text class="text-bold p-md">训练安排 ({{trainingDays.length}}天{{cycleDays ? ', ' + cycleDays + '天周期' : ''}})</text>
+
+    <view wx:for="{{trainingDays}}" wx:key="id" class="day-card card">
+      <!-- 训练日头部 -->
+      <view class="day-header" data-id="{{item.id}}" bindtap="onToggleDay">
+        <view class="day-header-left">
+          <view class="day-color-line" style="background:{{colorList[index % colorList.length]}}"></view>
+          <view>
+            <text class="text-bold">{{item.dayName}}</text>
+            <text class="text-hint text-sm block">Day {{item.dayNumber}} · {{item.exercises.length}}个动作</text>
+          </view>
+        </view>
+        <text class="day-arrow {{expandedDays.indexOf(item.id) >= 0 ? 'open' : ''}}">▾</text>
+      </view>
+
+      <!-- 展开动作列表 -->
+      <view wx:if="{{expandedDays.indexOf(item.id) >= 0}}" class="day-body">
+        <view wx:for="{{item.exercises}}" wx:for-item="ex" wx:key="id"
+          class="exercise-row scale-active"
+          data-exercise="{{ex}}"
+          bindtap="onExerciseTap">
+          <image wx:if="{{ex.imageUrl}}" src="{{ex.imageUrl}}" class="ex-thumb" mode="aspectFill" lazy-load />
+          <view class="ex-info">
+            <text class="text-bold">{{ex.exerciseName}}</text>
+            <text class="text-hint text-sm">{{ex.sets}}组 × {{ex.reps}}次 · 休息{{ex.restSeconds}}s</text>
+          </view>
+          <text class="arrow">▶</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 开始训练按钮 -->
+  <view class="bottom-btn">
+    <view class="btn-pill scale-active" bind:tap="startTraining">开始训练</view>
+  </view>
+</view>
