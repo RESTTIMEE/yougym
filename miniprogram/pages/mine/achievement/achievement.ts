@@ -5,6 +5,7 @@ Page({
     points: 0,
     displayPoints: 0,
     achievements: [] as any[],
+    loading: true,
   },
 
   onShow() {
@@ -12,6 +13,7 @@ Page({
   },
 
   async loadData() {
+    this.setData({ loading: true });
     try {
       const [achievements] = await Promise.all([
         achievementApi.getMyAchievements(),
@@ -27,6 +29,7 @@ Page({
     } catch (_) {
       wx.showToast({ title: '加载失败', icon: 'none' });
     }
+    this.setData({ loading: false });
   },
 
   animatePoints(from: number, to: number) {

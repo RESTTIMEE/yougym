@@ -5,7 +5,7 @@
   </view>
 
   <text class="section-title">成就</text>
-  <view class="achievement-grid">
+  <view class="achievement-grid" wx:if="{{!loading}}">
     <view wx:for="{{achievements}}" wx:key="id" class="ach-card {{item.unlocked ? 'unlocked' : 'locked'}}">
       <text class="ach-icon">{{item.icon}}</text>
       <text class="ach-name">{{item.name}}</text>
@@ -13,5 +13,8 @@
       <text wx:if="{{item.unlocked}}" class="ach-badge">已解锁</text>
       <text wx:else class="ach-lock">🔒</text>
     </view>
+  </view>
+  <view class="achievement-grid" wx:if="{{loading}}">
+    <skeleton type="card" count="4" />
   </view>
 </view>

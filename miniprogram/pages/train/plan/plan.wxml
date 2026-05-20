@@ -13,6 +13,8 @@
       <text class="text-hint text-sm">{{item.description}}</text>
     </view>
   </view>
-  <view class="loading-more" wx:if="{{isLoading}}">加载中...</view>
+  <view class="loading-more" wx:if="{{isLoading}}">
+    <skeleton type="list" count="3" />
+  </view>
   <view class="empty-state" wx:if="{{!isLoading && plans.length === 0}}">暂无计划</view>
 </view>

@@ -35,19 +35,27 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "assets/tabbar/home.png",
+        "selectedIconPath": "assets/tabbar/home-active.png"
       },
       {
         "pagePath": "pages/train/index/index",
-        "text": "训练"
+        "text": "训练",
+        "iconPath": "assets/tabbar/train.png",
+        "selectedIconPath": "assets/tabbar/train-active.png"
       },
       {
         "pagePath": "pages/data/index/index",
-        "text": "数据"
+        "text": "数据",
+        "iconPath": "assets/tabbar/data.png",
+        "selectedIconPath": "assets/tabbar/data-active.png"
       },
       {
         "pagePath": "pages/mine/index/index",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "assets/tabbar/mine.png",
+        "selectedIconPath": "assets/tabbar/mine-active.png"
       }
     ]
   },

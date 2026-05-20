@@ -45,7 +45,9 @@ Page({
         total: res.data.total,
         noMore: this.data.page * this.data.pageSize >= res.data.total,
       });
-    } catch (_) { /* ignore */ }
+    } catch (_) {
+      wx.showToast({ title: '加载失败', icon: 'none' });
+    }
     finally { this.setData({ loading: false }); }
   },
 
