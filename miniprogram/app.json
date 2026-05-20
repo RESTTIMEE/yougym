@@ -16,6 +16,7 @@
     "pages/mine/diet/diet",
     "pages/mine/privacy/privacy",
     "pages/mine/agreement/agreement",
+    "pages/mine/about/about",
     "pages/ai/advice/advice",
     "pages/ai/posture/posture"
   ],

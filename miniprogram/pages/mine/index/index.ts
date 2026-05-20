@@ -12,7 +12,7 @@ Page({
       { key: 'diet',       icon: '🍎', label: '饮食记录', url: '/pages/mine/diet/diet' },
       { key: 'privacy',    icon: '🔒', label: '隐私政策', url: '/pages/mine/privacy/privacy' },
       { key: 'agreement',  icon: '📋', label: '用户协议', url: '/pages/mine/agreement/agreement' },
-      { key: 'about',      icon: 'ℹ️', label: '关于优健', url: '' },
+      { key: 'about',      icon: 'ℹ️', label: '关于优健', url: '/pages/mine/about/about' },
     ],
   },
 
