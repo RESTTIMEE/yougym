@@ -34,6 +34,7 @@ model User {
   refreshTokens     RefreshToken[]
   postureAssessments       PostureAssessment[]
   postureCorrectionPlans   PostureCorrectionPlan[]
+  notificationLogs         NotificationLog[]
 }
 
 model BodyRecord {
@@ -263,4 +264,15 @@ model PostureCorrectionPlan {
   videoUrl        String?            @db.VarChar(512)
   imageUrl        String?            @db.VarChar(512)
   notes           String?            @db.Text
+}
+
+// ========== 通知 ==========
+model NotificationLog {
+  id      Int      @id @default(autoincrement())
+  userId  Int
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type    String   @db.VarChar(16)
+  sentAt  DateTime @default(now())
+
+  @@index([userId, sentAt])
 }
