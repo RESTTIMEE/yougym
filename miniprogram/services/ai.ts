@@ -1,4 +1,5 @@
 import { BASE_URL } from '../utils/constants';
+import { authApi } from './auth';
 
 const getToken = () => {
   try {
@@ -8,47 +9,35 @@ const getToken = () => {
   }
 };
 
-const request = (method: 'GET' | 'POST', url: string, data?: any) =>
-  new Promise<any>((resolve, reject) => {
-    wx.request({
-      method,
-      url: `${BASE_URL}${url}`,
-      header: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
-      data,
-      success: (res: any) => {
-        if (res.statusCode === 200 || res.statusCode === 201) {
-          resolve(res.data.data);
-        } else {
-          reject(res.data);
-        }
-      },
-      fail: reject,
-    });
-  });
-
-const upload = (url: string, filePath: string, formData?: Record<string, string>) =>
-  new Promise<any>((resolve, reject) => {
-    wx.uploadFile({
-      url: `${BASE_URL}${url}`,
-      filePath,
-      name: 'image',
-      formData,
-      header: { Authorization: `Bearer ${getToken()}` },
-      success: (res: any) => {
-        try {
-          const data = JSON.parse(res.data);
-          if (data.code === 200 || data.code === 201) {
-            resolve(data.data);
+const request = async (method: 'GET' | 'POST', url: string, data?: any): Promise<any> => {
+  const doRequest = (): Promise<any> =>
+    new Promise<any>((resolve, reject) => {
+      wx.request({
+        method,
+        url: `${BASE_URL}${url}`,
+        header: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
+        data,
+        success: (res: any) => {
+          if (res.statusCode === 200 || res.statusCode === 201) {
+            resolve(res.data.data);
           } else {
-            reject(data);
+            reject(res.data);
           }
-        } catch {
-          reject(res);
-        }
-      },
-      fail: reject,
+        },
+        fail: reject,
+      });
     });
-  });
+
+  try {
+    return await doRequest();
+  } catch (err: any) {
+    if (err?.statusCode === 401 || err?.code === 401) {
+      const newToken = await authApi.refresh();
+      if (newToken) return doRequest();
+    }
+    throw err;
+  }
+};
 
 const streamRequest = (url: string, onChunk: (text: string) => void): Promise<void> =>
   new Promise((resolve, reject) => {

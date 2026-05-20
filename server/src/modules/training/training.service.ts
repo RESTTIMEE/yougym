@@ -24,7 +24,8 @@ export class TrainingService {
         take: pageSize,
         include: {
           trainingDays: {
-            select: { id: true, dayNumber: true, dayName: true, exercises: { select: { id: true } } },
+            orderBy: { dayNumber: 'asc' },
+            include: { exercises: { orderBy: { sortOrder: 'asc' } } },
           },
         },
         orderBy: { id: 'asc' },
@@ -109,11 +110,14 @@ export class TrainingService {
     return plan;
   }
 
-  async createUserPlan(userId: number, data: { planId: number; startDate: string }) {
+  async createUserPlan(userId: number, data: { planId: number; startDate: string; endDate?: string; goalDescription?: string }) {
     const plan = await this.prisma.trainingPlan.findUniqueOrThrow({ where: { id: data.planId } });
     const startDate = new Date(data.startDate);
-    const endDate = new Date(startDate);
-    endDate.setDate(endDate.getDate() + plan.durationWeeks * 7);
+    const endDate = data.endDate ? new Date(data.endDate) : (() => {
+      const d = new Date(startDate);
+      d.setDate(d.getDate() + plan.durationWeeks * 7);
+      return d;
+    })();
 
     const userPlan = await this.prisma.userTrainingPlan.create({
       data: {
@@ -121,6 +125,7 @@ export class TrainingService {
         planId: data.planId,
         startDate,
         endDate,
+        goalDescription: data.goalDescription,
         status: 'active',
       },
     });

@@ -11,6 +11,24 @@ export const authApi = {
     return res;
   },
 
+  async logout(refreshToken: string): Promise<void> {
+    try {
+      await new Promise<any>((resolve, reject) => {
+        wx.request({
+          url: `${BASE_URL}/auth/logout`,
+          method: 'POST',
+          data: { refreshToken },
+          header: { 'Content-Type': 'application/json', Authorization: `Bearer ${wx.getStorageSync('accessToken') || ''}` },
+          success: (r) => {
+            if (r.statusCode === 200) resolve(undefined);
+            else reject(new Error('Logout failed'));
+          },
+          fail: reject,
+        });
+      });
+    } catch { /* fire-and-forget */ }
+  },
+
   async refresh(): Promise<string | null> {
     const refreshToken = wx.getStorageSync('refreshToken');
     if (!refreshToken) return null;

@@ -31,7 +31,7 @@ export const trainingApi = {
   },
 
   /** 获取我的训练计划 */
-  getMyPlans(): Promise<ApiResponse<TrainingPlan[]>> {
+  getMyPlans(): Promise<ApiResponse<UserTrainingPlan[]>> {
     return get('/training/my-plans');
   },
 
@@ -52,23 +52,13 @@ export const trainingApi = {
     return get('/training/checkins', params);
   },
 
-  /** 获取年度打卡热力图数据 */
-  getYearCheckins(year: number): Promise<ApiResponse<Array<{ date: string; durationMinutes: number; feelingRating: number }>>> {
-    return get('/training/checkins', { year });
-  },
-
-  /** 获取周训练报告 */
-  getWeeklyReport(): Promise<ApiResponse<any>> {
-    return get('/training/report/weekly');
-  },
-
-  /** 获取月训练报告 */
-  getMonthlyReport(): Promise<ApiResponse<any>> {
-    return get('/training/report/monthly');
-  },
-
   /** 获取周期训练报告 */
   getCycleReport(userPlanId: number): Promise<ApiResponse<any>> {
     return get('/training/report/cycle', { userPlanId });
+  },
+
+  /** 获取年度打卡热力图数据 */
+  getYearCheckins(year: number): Promise<ApiResponse<Array<{ date: string; durationMinutes: number; feelingRating: number }>>> {
+    return get('/training/checkins', { year });
   },
 };

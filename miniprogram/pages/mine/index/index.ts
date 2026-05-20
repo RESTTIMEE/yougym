@@ -63,8 +63,13 @@ Page({
     wx.showModal({
       title: '退出登录',
       content: '确定退出当前账号？',
-      success: (res) => {
+      success: async (res) => {
         if (res.confirm) {
+          const refreshToken = wx.getStorageSync('refreshToken');
+          if (refreshToken) {
+            // Attempt server-side token revocation (fire-and-forget)
+            authApi.logout(refreshToken).catch(() => {});
+          }
           userStore.logout();
           this.setData({ isLogin: false, user: null });
         }
