@@ -2,7 +2,7 @@
   <!-- 顶部问候 -->
   <view class="header-card card">
     <view class="header-row">
-      <image wx:if="{{userAvatar}}" class="header-avatar" src="{{userAvatar}}" mode="aspectFill" />
+      <image wx:if="{{userAvatar}}" class="header-avatar avatar" src="{{userAvatar}}" mode="aspectFill" />
       <view>
         <view class="text-lg">{{greeting}}，{{userNickname}}</view>
         <view class="header-subtitle mt-sm">准备好今天的训练了吗？</view>

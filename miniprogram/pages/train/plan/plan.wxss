@@ -1,3 +1,10 @@
-.plan-card { display: flex; margin-bottom: var(--spacing-sm); padding: 0; overflow: hidden; }
+.plan-card {
+  display: flex;
+  margin-bottom: var(--spacing-sm);
+  padding: 0;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-md);
+}
 .plan-cover { width: 200rpx; height: 160rpx; }
 .plan-info { flex: 1; padding: var(--spacing-md); display: flex; flex-direction: column; }

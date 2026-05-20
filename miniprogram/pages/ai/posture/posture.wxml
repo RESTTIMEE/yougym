@@ -1,5 +1,5 @@
 <view class="container">
-  <view class="upload-section" bindtap="onChooseImage">
+  <view class="upload-section scale-active" bindtap="onChooseImage">
     <image wx:if="{{imagePath}}" class="preview" src="{{imagePath}}" mode="aspectFit" />
     <view wx:else class="placeholder">
       <text class="ph-icon">📷</text>
@@ -9,7 +9,7 @@
 
   <textarea class="desc-input" placeholder="描述你的体态问题（选填）" value="{{description}}" bindinput="onDescInput" maxlength="200" />
 
-  <button class="submit-btn" bindtap="onSubmit" loading="{{loading}}" disabled="{{!imagePath}}">开始分析</button>
+  <button class="submit-btn scale-active" bindtap="onSubmit" loading="{{loading}}" disabled="{{!imagePath}}">开始分析</button>
 
   <view wx:if="{{result}}" class="result-section">
     <view class="result-header">

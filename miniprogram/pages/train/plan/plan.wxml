@@ -2,7 +2,7 @@
   <view
     wx:for="{{plans}}"
     wx:key="id"
-    class="plan-card card"
+    class="plan-card card scale-active"
     data-id="{{item.id}}"
     bind:tap="onPlanTap"
   >

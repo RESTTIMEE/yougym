@@ -19,20 +19,20 @@
 .app-name {
   font-size: 36rpx;
   font-weight: 600;
-  color: #1A1A1A;
+  color: var(--text-primary);
   margin-top: 16rpx;
 }
 
 .app-version {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: var(--text-hint);
   margin-top: 8rpx;
 }
 
 .about-desc {
   margin-top: 16rpx;
   font-size: 28rpx;
-  color: #555;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
@@ -43,7 +43,7 @@
 .section-title {
   font-size: 30rpx;
   font-weight: 600;
-  color: #1A1A1A;
+  color: var(--text-primary);
   display: block;
   margin-bottom: 16rpx;
 }
@@ -56,17 +56,17 @@
 
 .tech-item {
   font-size: 26rpx;
-  color: #555;
+  color: var(--text-secondary);
 }
 
 .contact-text {
   font-size: 26rpx;
-  color: #1A56DB;
+  color: var(--primary);
 }
 
 .copyright {
   margin-top: 48rpx;
   text-align: center;
   font-size: 22rpx;
-  color: #AAA;
+  color: var(--text-disabled);
 }

@@ -23,5 +23,5 @@
       <text>{{restOptions[restIndex]}}s</text>
     </picker>
   </view>
-  <button class="btn-primary mt-lg" bind:tap="onSubmit">保存</button>
+  <button class="btn-primary mt-lg scale-active" bind:tap="onSubmit">保存</button>
 </view>

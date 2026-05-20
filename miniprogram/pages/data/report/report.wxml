@@ -1,7 +1,7 @@
 <view class="container">
   <view class="tabs">
-    <view class="tab {{activeTab === 'cycle' ? 'active' : ''}}" bindtap="switchTab" data-tab="cycle">周期报告</view>
-    <view class="tab {{activeTab === 'monthly' ? 'active' : ''}}" bindtap="switchTab" data-tab="monthly">月度报告</view>
+    <view class="tab {{activeTab === 'cycle' ? 'active' : ''}} scale-active" bindtap="switchTab" data-tab="cycle">周期报告</view>
+    <view class="tab {{activeTab === 'monthly' ? 'active' : ''}} scale-active" bindtap="switchTab" data-tab="monthly">月度报告</view>
   </view>
 
   <!-- 周期报告 -->
@@ -35,7 +35,7 @@
       <input class="input" placeholder="腰围(cm)" value="{{endWaist}}" bindinput="onFieldInput" data-field="endWaist" type="digit" />
       <input class="input" placeholder="臀围(cm)" value="{{endHip}}" bindinput="onFieldInput" data-field="endHip" type="digit" />
     </view>
-    <button class="btn" bindtap="calcMonthly">计算变化</button>
+    <button class="btn scale-active" bindtap="calcMonthly">计算变化</button>
 
     <view wx:if="{{monthlyResult}}" class="result-card">
       <text class="result-item">体重变化：{{monthlyResult.changes.weight}}kg</text>

@@ -2,7 +2,7 @@
   padding: 32rpx;
   line-height: 1.8;
   font-size: 28rpx;
-  color: #333;
+  color: var(--text-primary);
 }
 .title {
   font-size: 36rpx;
@@ -12,7 +12,7 @@
 }
 .update-date {
   text-align: center;
-  color: #999;
+  color: var(--text-hint);
   margin-bottom: 32rpx;
 }
 .section {
@@ -29,5 +29,5 @@
 .list-item {
   padding-left: 24rpx;
   margin-bottom: 6rpx;
-  color: #555;
+  color: var(--text-secondary);
 }

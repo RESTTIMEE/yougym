@@ -9,6 +9,10 @@
 .form-group { background: var(--bg-card); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 20rpx; }
 .section-title { font-size: 30rpx; font-weight: bold; color: var(--text-primary); margin-bottom: var(--spacing-sm); display: block; }
 .input { border: 1rpx solid var(--border); border-radius: var(--radius-sm); padding: var(--spacing-sm); margin-bottom: 12rpx; font-size: 28rpx; }
+.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4rpx rgba(26, 86, 219, 0.12);
+}
 .btn { background: var(--primary); color: var(--text-white); border-radius: var(--radius-sm); margin: 20rpx 0; }
 .result-card { background: var(--bg-card); border-radius: var(--radius-md); padding: var(--spacing-md); margin-top: 20rpx; }
 .result-item { display: block; font-size: 28rpx; color: var(--text-primary); margin-bottom: var(--spacing-xs); }

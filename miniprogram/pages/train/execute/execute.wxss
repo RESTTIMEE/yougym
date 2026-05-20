@@ -48,7 +48,7 @@
   border-color: var(--primary);
 }
 .set-dot.done .set-dot-num {
-  color: #fff;
+  color: var(--text-white);
 }
 .set-dot-num {
   font-size: 24rpx;
@@ -92,7 +92,7 @@
 }
 .adj-btn:active {
   background: var(--primary);
-  color: #fff;
+  color: var(--text-white);
 }
 .num-input {
   width: 100rpx;
@@ -225,11 +225,11 @@
 }
 .btn-primary {
   background: var(--primary);
-  color: #fff;
+  color: var(--text-white);
 }
 .btn-accent {
   background: var(--accent);
-  color: #fff;
+  color: var(--text-white);
 }
 
 /* 完成页 */
@@ -278,10 +278,10 @@
 }
 .feeling-star {
   font-size: 48rpx;
-  color: #E0E0E0;
+  color: var(--star-inactive);
 }
 .feeling-star.active {
-  color: #FFB800;
+  color: var(--star-active);
 }
 .notes-wrap {
   padding: 0 var(--spacing-sm);

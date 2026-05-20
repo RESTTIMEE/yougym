@@ -25,7 +25,7 @@
       <text class="today-name">{{todayTraining.dayName}}</text>
       <text class="text-hint text-sm">{{todayTraining.planName}} · Day {{todayTraining.dayNumber}}</text>
     </view>
-    <text class="arrow">-></text>
+    <text class="arrow">→</text>
   </view>
 
   <!-- 训练热力图 -->
@@ -47,7 +47,7 @@
     <view
       wx:for="{{hotPlans}}"
       wx:key="id"
-      class="plan-card card"
+      class="plan-card card scale-active"
       data-id="{{item.id}}"
       bind:tap="onPlanTap"
     >

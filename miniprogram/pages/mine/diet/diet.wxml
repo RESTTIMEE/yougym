@@ -26,7 +26,7 @@
     <view
       wx:for="{{searchResults}}"
       wx:key="id"
-      class="food-item"
+      class="food-item scale-active"
       bindtap="onSelectFood"
       data-food="{{item}}"
     >
@@ -64,7 +64,7 @@
     </view>
     <view wx:if="{{currentItems.length > 0}}" class="total-row">
       <text>合计: {{currentItems.reduce((s, i) => s + i.calories, 0)}}kcal</text>
-      <button class="submit-btn" bindtap="onSubmitRecords">保存</button>
+      <button class="submit-btn scale-active" bindtap="onSubmitRecords">保存</button>
     </view>
   </view>
 

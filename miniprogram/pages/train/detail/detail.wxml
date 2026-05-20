@@ -18,7 +18,7 @@
 
     <view wx:for="{{trainingDays}}" wx:key="id" class="day-card card">
       <!-- 训练日头部 -->
-      <view class="day-header" data-id="{{item.id}}" bindtap="onToggleDay">
+      <view class="day-header scale-active" data-id="{{item.id}}" bindtap="onToggleDay">
         <view class="day-header-left">
           <view class="day-color-line" style="background:{{colorList[index % colorList.length]}}"></view>
           <view>

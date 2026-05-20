@@ -6,7 +6,7 @@
       <text class="text-bold text-lg">{{user.nickname}}</text>
       <text class="text-hint text-sm">健身目标: {{user.fitnessGoal}}</text>
     </view>
-    <button class="login-btn" wx:if="{{!isLogin}}" size="mini" bind:tap="onLogin">微信登录</button>
+    <button class="login-btn scale-active" wx:if="{{!isLogin}}" size="mini" bind:tap="onLogin">微信登录</button>
   </view>
 
   <!-- 隐私同意 -->
@@ -37,6 +37,6 @@
 
   <!-- 退出登录 -->
   <view class="mt-lg text-center" wx:if="{{isLogin}}">
-    <button class="logout-btn" bind:tap="onLogout">退出登录</button>
+    <button class="logout-btn scale-active" bind:tap="onLogout">退出登录</button>
   </view>
 </view>

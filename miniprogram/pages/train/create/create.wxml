@@ -45,7 +45,7 @@
 
     <view wx:for="{{days}}" wx:key="key" class="day-editor {{item.expanded ? 'expanded' : ''}}">
       <!-- 日头部 -->
-      <view class="day-editor-header" data-key="{{item.key}}" bindtap="onToggleDay">
+      <view class="day-editor-header scale-active" data-key="{{item.key}}" bindtap="onToggleDay">
         <view class="deh-left">
           <view class="day-color-dot" style="background:{{colorList[index % colorList.length]}}"></view>
           <view wx:if="{{item.expanded}}" class="deh-input-wrap" catchtap="">

@@ -29,7 +29,7 @@ Page({
         plan: res.data,
         trainingDays,
         cycleDays: res.data.cycleDays || 7,
-        expandedDays: trainingDays.map((d: TrainingDay) => d.id),
+        expandedDays: trainingDays.length > 0 ? [trainingDays[0].id] : [],
       });
     } catch (_) {
       wx.showToast({ title: '加载失败', icon: 'none' });

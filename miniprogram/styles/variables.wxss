@@ -1,0 +1,44 @@
+/* 优健 全局样式变量 */
+
+/* 主色调 */
+page { --primary: #1A56DB; --primary-dark: #1438A4; --primary-light: #4F7DE0; }
+page { --gradient-primary: linear-gradient(135deg, #1A56DB, #4F7DE0); }
+
+/* 强调色 - 珊瑚橙 */
+page { --accent: #FF6B4A; --accent-light: #FFF0EC; }
+
+/* 功能色 */
+page { --success: #34C759; --success-light: #E6F9ED; --warning: #FF9500; --warning-light: #FFF4E5; --danger: #FF3B30; --danger-light: #FFEEED; --info: #5AC8FA; }
+
+/* 背景色 */
+page { --bg-page: #F5F7FA; --bg-card: #FFFFFF; --bg-input: #F8F9FA; }
+
+/* 文字色 */
+page { --text-primary: #1A1A1A; --text-secondary: #666666; --text-hint: #999999; --text-white: #FFFFFF; --text-disabled: #C7C7CC; }
+
+/* 边框 */
+page { --border: #E5E5EA; --border-light: #F0F0F0; }
+
+/* 间距 */
+page { --spacing-xs: 8rpx; --spacing-sm: 16rpx; --spacing-md: 24rpx; --spacing-lg: 32rpx; --spacing-xl: 48rpx; }
+
+/* 圆角 */
+page { --radius-sm: 8rpx; --radius-md: 16rpx; --radius-lg: 24rpx; --radius-xl: 44rpx; --radius-round: 50%; }
+
+/* 阴影 */
+page { --shadow-sm: 0 2rpx 8rpx rgba(0,0,0,0.04); --shadow-card: 0 2rpx 12rpx rgba(0,0,0,0.06); --shadow-md: 0 4rpx 20rpx rgba(0,0,0,0.08); --shadow-glow: 0 8rpx 32rpx rgba(26,86,219,0.25); }
+
+/* 过渡 */
+page { --transition: 0.2s ease; --transition-slow: 0.35s ease; }
+
+/* 宏量营养素颜色 */
+page { --macro-protein: #3B82F6; --macro-fat: #F59E0B; --macro-carbs: #8B5CF6; }
+
+/* 星级评分 */
+page { --star-active: #FFB800; --star-inactive: #E0E0E0; }
+
+/* 成就 */
+page { --achievement-gold: rgba(255, 215, 0, 0.4); }
+
+/* 难度 */
+page { --diff-beginner: #22C55E; --diff-intermediate: #F59E0B; }

@@ -3,7 +3,7 @@
 .date-btn { background: var(--primary); color: var(--text-white); padding: 10rpx 24rpx; border-radius: var(--radius-sm); font-size: 28rpx; }
 .meal-tabs { display: flex; margin-left: 20rpx; }
 .meal-tab { padding: 8rpx 20rpx; font-size: 26rpx; color: var(--text-secondary); border-radius: var(--radius-xl); background: var(--bg-input); margin-right: var(--spacing-xs); }
-.meal-tab.active { background: var(--accent); color: var(--text-white); }
+.meal-tab.active { background: var(--primary); color: var(--text-white); }
 .search-box { margin-bottom: var(--spacing-sm); }
 .search-input-wrap { display: flex; align-items: center; background: var(--bg-card); border-radius: var(--radius-sm); padding: 0 var(--spacing-sm); }
 .search-icon { font-size: 28rpx; flex-shrink: 0; margin-right: var(--spacing-xs); opacity: 0.6; }
@@ -41,9 +41,9 @@
 .macro-value { font-size: 24rpx; color: var(--text-primary); font-weight: bold; }
 .progress-bar { height: 10rpx; background: var(--bg-input); border-radius: 5rpx; overflow: hidden; }
 .progress-fill { height: 100%; border-radius: 5rpx; transition: width 0.3s ease; }
-.progress-fill.protein { background: #3B82F6; }
-.progress-fill.fat { background: #F59E0B; }
-.progress-fill.carbs { background: #8B5CF6; }
+.progress-fill.protein { background: var(--macro-protein); }
+.progress-fill.fat { background: var(--macro-fat); }
+.progress-fill.carbs { background: var(--macro-carbs); }
 
 .meal-group { margin-bottom: 16rpx; }
 .meal-group-header { display: flex; justify-content: space-between; align-items: center; padding: 8rpx 0; border-bottom: 2rpx solid var(--border); }

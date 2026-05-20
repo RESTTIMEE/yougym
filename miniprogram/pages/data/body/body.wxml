@@ -34,5 +34,5 @@
     <text wx:if="{{errors.hip}}" class="error-text">{{errors.hip}}</text>
   </view>
 
-  <button class="btn-primary mt-lg" bind:tap="onSubmit">保存记录</button>
+  <button class="btn-primary mt-lg scale-active" bind:tap="onSubmit">保存记录</button>
 </view>

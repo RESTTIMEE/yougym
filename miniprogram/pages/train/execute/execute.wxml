@@ -8,13 +8,13 @@
         <text wx:if="{{currentDay}}" class="day-bar-meta">周期第{{currentDay.dayNumber}}天</text>
       </view>
     </view>
-    <view class="day-bar-switch {{showDayPanel ? 'active' : ''}}" bindtap="onToggleDayPanel">切换 ▾</view>
+    <view class="day-bar-switch {{showDayPanel ? 'active' : ''}} scale-active" bindtap="onToggleDayPanel">切换 ▾</view>
   </view>
 
   <!-- 切换面板 -->
   <view wx:if="{{showDayPanel}}" class="day-panel fade-in">
     <view wx:for="{{trainingDays}}" wx:key="id"
-      class="day-panel-item {{item.dayNumber === currentDay.dayNumber ? 'active' : ''}}"
+      class="day-panel-item {{item.dayNumber === currentDay.dayNumber ? 'active' : ''}} scale-active"
       data-day-number="{{item.dayNumber}}"
       bindtap="onSelectDay">
       <text>Day {{item.dayNumber}} · {{item.dayName}}</text>
@@ -46,7 +46,7 @@
       <view class="input-group">
         <text class="input-label">重量 (kg)</text>
         <view class="input-row">
-          <view class="adj-btn" data-delta="{{-2.5}}" bindtap="adjustWeight">−</view>
+          <view class="adj-btn scale-active" data-delta="{{-2.5}}" bindtap="adjustWeight">−</view>
           <input
             class="num-input"
             type="digit"
@@ -54,13 +54,13 @@
             bindinput="onWeightInput"
             placeholder="0"
           />
-          <view class="adj-btn" data-delta="{{2.5}}" bindtap="adjustWeight">+</view>
+          <view class="adj-btn scale-active" data-delta="{{2.5}}" bindtap="adjustWeight">+</view>
         </view>
       </view>
       <view class="input-group">
         <text class="input-label">次数</text>
         <view class="input-row">
-          <view class="adj-btn" data-delta="{{-1}}" bindtap="adjustReps">−</view>
+          <view class="adj-btn scale-active" data-delta="{{-1}}" bindtap="adjustReps">−</view>
           <input
             class="num-input"
             type="number"
@@ -68,7 +68,7 @@
             bindinput="onRepsInput"
             placeholder="{{currentExercise.reps}}"
           />
-          <view class="adj-btn" data-delta="{{1}}" bindtap="adjustReps">+</view>
+          <view class="adj-btn scale-active" data-delta="{{1}}" bindtap="adjustReps">+</view>
         </view>
       </view>
     </view>
@@ -100,9 +100,9 @@
     </view>
     <text class="rest-label">休息中</text>
     <view class="rest-adjust">
-      <view class="rest-adj-btn" data-delta="{{-10}}" bindtap="adjustRest">-10s</view>
-      <view class="rest-skip-btn" bindtap="skipRest">跳过</view>
-      <view class="rest-adj-btn" data-delta="{{10}}" bindtap="adjustRest">+10s</view>
+      <view class="rest-adj-btn scale-active" data-delta="{{-10}}" bindtap="adjustRest">-10s</view>
+      <view class="rest-skip-btn scale-active" bindtap="skipRest">跳过</view>
+      <view class="rest-adj-btn scale-active" data-delta="{{10}}" bindtap="adjustRest">+10s</view>
     </view>
   </view>
 

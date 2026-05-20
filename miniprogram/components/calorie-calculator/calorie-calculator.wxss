@@ -26,8 +26,8 @@
 .macro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16rpx; }
 .macro-item { text-align: center; background: var(--bg-input); border-radius: var(--radius-sm); padding: 20rpx 12rpx; }
 .macro-num { font-size: 36rpx; font-weight: bold; color: var(--text-primary); display: block; }
-.macro-num.protein { color: #3B82F6; }
-.macro-num.fat { color: #F59E0B; }
-.macro-num.carbs { color: #8B5CF6; }
+.macro-num.protein { color: var(--macro-protein); }
+.macro-num.fat { color: var(--macro-fat); }
+.macro-num.carbs { color: var(--macro-carbs); }
 .macro-unit { font-size: 22rpx; color: var(--text-hint); }
 .macro-tag { font-size: 22rpx; color: var(--text-secondary); display: block; margin-top: 4rpx; }
