@@ -287,7 +287,8 @@ Page({
     this.setData({ isResting: false, restRemaining: 0, timerSeconds: 0 });
   },
 
-  adjustRest(delta: number) {
+  adjustRest(e: WechatMiniprogram.TouchEvent) {
+    const delta = Number(e.currentTarget.dataset.delta);
     const newRemaining = Math.max(5, this.data.restRemaining + delta);
     this.setData({ restRemaining: newRemaining });
   },

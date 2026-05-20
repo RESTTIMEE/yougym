@@ -1,4 +1,4 @@
-/** 进度环形图组件（Canvas绘制） */
+/** @deprecated 进度环形图组件 — 未完成实现，暂不用于生产。保留以备后续 Canvas 2D API 重构。 */
 Component({
   properties: {
     percent: { type: Number, value: 0 },  // 0-100
