@@ -1,0 +1,13 @@
+<view class="chart-wrapper">
+  <text wx:if="{{title}}" class="chart-title">{{title}}</text>
+  <view class="chart-container">
+    <ec-canvas
+      id="bodyEcCanvas"
+      canvas-id="bodyEcCanvas"
+      ec="{{ec}}"
+    ></ec-canvas>
+    <view wx:if="{{!ecReady}}" class="chart-placeholder">
+      <text class="text-hint text-sm">图表加载中...</text>
+    </view>
+  </view>
+</view>

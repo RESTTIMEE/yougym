@@ -1,0 +1,32 @@
+<view class="container">
+  <view class="upload-section" bindtap="onChooseImage">
+    <image wx:if="{{imagePath}}" class="preview" src="{{imagePath}}" mode="aspectFit" />
+    <view wx:else class="placeholder">
+      <text class="ph-icon">📷</text>
+      <text class="ph-text">点击拍照或选择照片</text>
+    </view>
+  </view>
+
+  <textarea class="desc-input" placeholder="描述你的体态问题（选填）" value="{{description}}" bindinput="onDescInput" maxlength="200" />
+
+  <button class="submit-btn" bindtap="onSubmit" loading="{{loading}}" disabled="{{!imagePath}}">开始分析</button>
+
+  <view wx:if="{{result}}" class="result-section">
+    <view class="result-header">
+      <text class="result-type">{{result.postureType}}</text>
+      <text class="result-severity {{result.severity === '正常' ? 'normal' : 'warn'}}">{{result.severity}}</text>
+    </view>
+
+    <view wx:if="{{result.correctionPlan.length > 0}}" class="plan-section">
+      <text class="section-title">矫正方案</text>
+      <view wx:for="{{result.correctionPlan}}" wx:key="index" class="plan-card">
+        <text class="plan-name">{{item.exerciseName}}</text>
+        <view class="plan-meta">
+          <text class="plan-freq">{{item.frequency}}</text>
+          <text class="plan-dur">{{item.durationMinutes}}分钟</text>
+        </view>
+        <text wx:if="{{item.notes}}" class="plan-notes">{{item.notes}}</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,24 @@
+.container { padding: var(--spacing-sm); }
+.chart-section {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-md);
+}
+.chart-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+ec-canvas { width: 100%; height: 400rpx; }
+.quick-actions { display: flex; justify-content: space-around; align-items: center; margin-top: 40rpx; }
+.btn-divider { width: 2rpx; height: 48rpx; background: var(--border); flex-shrink: 0; }
+.btn {
+  flex: 1;
+  margin: 0 var(--spacing-xs);
+  background: var(--primary);
+  color: var(--text-white);
+  border-radius: var(--radius-sm);
+  font-size: 28rpx;
+}

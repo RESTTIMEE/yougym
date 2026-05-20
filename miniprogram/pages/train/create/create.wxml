@@ -1,0 +1,114 @@
+<view class="container">
+  <!-- 基本信息 -->
+  <view class="section">
+    <text class="section-title">计划信息</text>
+    <view class="form-group">
+      <text class="form-label">计划名称 *</text>
+      <input class="form-input" placeholder="如: 我的分化训练计划" value="{{name}}" bindinput="onNameInput" maxlength="20" />
+    </view>
+    <view class="form-group">
+      <text class="form-label">简介</text>
+      <textarea class="form-textarea" placeholder="描述训练目标与内容" value="{{description}}" bindinput="onDescInput" maxlength="200" />
+    </view>
+    <view class="form-group">
+      <text class="form-label">分类</text>
+      <picker range="{{categories}}" range-key="label" value="{{categoryIndex}}" bindchange="onCategoryChange">
+        <view class="picker-value">{{categories[categoryIndex].label}}</view>
+      </picker>
+    </view>
+    <view class="form-group">
+      <text class="form-label">难度</text>
+      <view class="slider-row">
+        <slider min="1" max="3" value="{{difficulty}}" activeColor="var(--primary)" block-size="20" bindchange="onDifficultyChange" />
+        <text class="slider-tag">{{difficulty === 1 ? '初级' : difficulty === 2 ? '中级' : '高级'}}</text>
+      </view>
+    </view>
+    <view class="form-row">
+      <view class="form-group flex-1">
+        <text class="form-label">周期(周)</text>
+        <picker range="{{[2,4,6,8,12,16]}}" value="{{[2,4,6,8,12,16].indexOf(durationWeeks)}}" bindchange="onDurationChange">
+          <view class="picker-value">{{durationWeeks}}周</view>
+        </picker>
+      </view>
+      <view class="form-group flex-1">
+        <text class="form-label">小周期(天)</text>
+        <picker range="{{[3,5,7]}}" value="{{[3,5,7].indexOf(cycleDays)}}" bindchange="onCycleChange">
+          <view class="picker-value">{{cycleDays}}天/周期</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <!-- 训练日手风琴 -->
+  <view class="section">
+    <text class="section-title">训练日安排</text>
+
+    <view wx:for="{{days}}" wx:key="key" class="day-editor {{item.expanded ? 'expanded' : ''}}">
+      <!-- 日头部 -->
+      <view class="day-editor-header" data-key="{{item.key}}" bindtap="onToggleDay">
+        <view class="deh-left">
+          <view class="day-color-dot" style="background:{{colorList[index % colorList.length]}}"></view>
+          <view wx:if="{{item.expanded}}" class="deh-input-wrap" catchtap="">
+            <input
+              class="day-name-input"
+              value="{{item.dayName}}"
+              bindinput="onDayNameInput"
+              data-key="{{item.key}}"
+              placeholder="训练日名称"
+              maxlength="16"
+            />
+          </view>
+          <view wx:else>
+            <text class="text-bold">{{item.dayName}}</text>
+            <text class="text-hint text-sm block">Day {{item.dayNumber}} · {{item.exercises.length}}个动作</text>
+          </view>
+        </view>
+        <view class="deh-actions">
+          <text wx:if="{{item.expanded && item.exercises.length > 0}}" class="action-icon del" data-key="{{item.key}}" catchtap="onRemoveDay">删除日</text>
+          <text class="day-arrow {{item.expanded ? 'open' : ''}}">▾</text>
+        </view>
+      </view>
+
+      <!-- 展开动作编辑 -->
+      <view wx:if="{{item.expanded}}" class="day-editor-body">
+        <view wx:for="{{item.exercises}}" wx:for-item="ex" wx:key="key" class="exercise-editor">
+          <view class="ex-editor-header">
+            <text class="text-hint text-sm">动作 {{index + 1}}</text>
+            <text class="ex-remove" data-day-key="{{item.key}}" data-ex-key="{{ex.key}}" catchtap="onRemoveExercise">✕</text>
+          </view>
+          <input
+            class="ex-name-input"
+            value="{{ex.exerciseName}}"
+            placeholder="动作名称 *"
+            bindinput="onExerciseFieldInput"
+            data-day-key="{{item.key}}"
+            data-ex-key="{{ex.key}}"
+            data-field="exerciseName"
+          />
+          <view class="ex-nums">
+            <view class="ex-num-item">
+              <text class="text-hint text-xs">组数</text>
+              <input class="num-input-sm" type="number" value="{{ex.sets}}" bindinput="onExerciseNumInput" data-day-key="{{item.key}}" data-ex-key="{{ex.key}}" data-field="sets" />
+            </view>
+            <view class="ex-num-item">
+              <text class="text-hint text-xs">次数</text>
+              <input class="num-input-sm" type="number" value="{{ex.reps}}" bindinput="onExerciseNumInput" data-day-key="{{item.key}}" data-ex-key="{{ex.key}}" data-field="reps" />
+            </view>
+            <view class="ex-num-item">
+              <text class="text-hint text-xs">休息(s)</text>
+              <input class="num-input-sm" type="number" value="{{ex.restSeconds}}" bindinput="onExerciseNumInput" data-day-key="{{item.key}}" data-ex-key="{{ex.key}}" data-field="restSeconds" />
+            </view>
+          </view>
+        </view>
+        <button class="add-ex-btn scale-active" data-key="{{item.key}}" bindtap="onAddExercise">+ 添加动作</button>
+      </view>
+    </view>
+
+    <!-- 休息日提示 -->
+    <view wx:if="{{days.length === 0}}" class="text-center text-hint p-md">暂无训练日</view>
+  </view>
+
+  <button class="submit-btn scale-active" bindtap="onSubmit" loading="{{saving}}" disabled="{{saving}}">
+    {{saving ? '创建中...' : '创建计划'}}
+  </button>
+</view>

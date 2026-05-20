@@ -1,0 +1,73 @@
+<view class="calculator">
+  <view class="search-row">
+    <input
+      class="search-input"
+      placeholder="搜索食物查看营养信息..."
+      value="{{keyword}}"
+      bindinput="onInput"
+    />
+    <text wx:if="{{selectedFood}}" class="clear-btn" bindtap="onClear">✕</text>
+  </view>
+
+  <view wx:if="{{searching}}" class="search-status">
+    <text class="text-hint text-sm">搜索中...</text>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view wx:if="{{showResults && results.length > 0}}" class="results">
+    <view
+      wx:for="{{results}}"
+      wx:key="id"
+      class="food-item scale-active"
+      data-food="{{item}}"
+      bindtap="onSelectFood"
+    >
+      <view class="food-item-left">
+        <text class="food-name">{{item.foodName}}</text>
+        <text class="food-sub">蛋白{{item.proteinG}}g · 脂肪{{item.fatG}}g · 碳水{{item.carbsG}}g</text>
+      </view>
+      <text class="food-kcal">{{item.caloriesPer100g}}kcal</text>
+    </view>
+  </view>
+
+  <view wx:if="{{showResults && results.length === 0 && !searching && keyword}}" class="no-result">
+    <text class="text-hint">未找到相关食物</text>
+  </view>
+
+  <!-- 营养计算结果 -->
+  <view wx:if="{{selectedFood}}" class="result-card">
+    <view class="result-header">
+      <text class="result-name">{{selectedFood.foodName}}</text>
+      <text class="result-per100">(每100g: {{selectedFood.caloriesPer100g}}kcal)</text>
+    </view>
+
+    <view class="amount-row">
+      <text class="amount-label">份量</text>
+      <input class="amount-input" type="number" value="{{amount}}" bindinput="onAmountChange" />
+      <text class="amount-unit">g</text>
+    </view>
+
+    <view class="macro-grid">
+      <view class="macro-item">
+        <text class="macro-num">{{selectedFood.calcResult.total}}</text>
+        <text class="macro-unit">kcal</text>
+        <text class="macro-tag">热量</text>
+      </view>
+      <view class="macro-item">
+        <text class="macro-num protein">{{selectedFood.calcResult.protein}}</text>
+        <text class="macro-unit">g</text>
+        <text class="macro-tag">蛋白质</text>
+      </view>
+      <view class="macro-item">
+        <text class="macro-num fat">{{selectedFood.calcResult.fat}}</text>
+        <text class="macro-unit">g</text>
+        <text class="macro-tag">脂肪</text>
+      </view>
+      <view class="macro-item">
+        <text class="macro-num carbs">{{selectedFood.calcResult.carbs}}</text>
+        <text class="macro-unit">g</text>
+        <text class="macro-tag">碳水</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,27 @@
+<view class="page-container">
+  <view class="card form-group">
+    <text class="form-label">身高 (cm)</text>
+    <input class="form-input {{errors.height ? 'error' : ''}}" type="digit" placeholder="如 175" value="{{profile.height}}" bindinput="onHeightInput" />
+    <text wx:if="{{errors.height}}" class="error-text">{{errors.height}}</text>
+
+    <text class="form-label mt-md">体重 (kg)</text>
+    <input class="form-input {{errors.weight ? 'error' : ''}}" type="digit" placeholder="如 70" value="{{profile.weight}}" bindinput="onWeightInput" />
+    <text wx:if="{{errors.weight}}" class="error-text">{{errors.weight}}</text>
+
+    <text class="form-label mt-md">性别</text>
+    <picker range="{{genders}}" value="{{genderIndex}}" bindchange="onGenderChange">
+      <text>{{genders[genderIndex]}}</text>
+    </picker>
+
+    <text class="form-label mt-md">健身目标</text>
+    <picker range="{{goals}}" range-key="label" value="{{goalIndex}}" bindchange="onGoalChange">
+      <text>{{goals[goalIndex].label}}</text>
+    </picker>
+
+    <text class="form-label mt-md">默认休息时长</text>
+    <picker range="{{restOptions}}" value="{{restIndex}}" bindchange="onRestChange">
+      <text>{{restOptions[restIndex]}}s</text>
+    </picker>
+  </view>
+  <button class="btn-primary mt-lg" bind:tap="onSubmit">保存</button>
+</view>

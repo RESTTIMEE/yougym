@@ -1,0 +1,2 @@
+.progress-ring { position: relative; display: flex; align-items: center; justify-content: center; }
+.percent-text { position: absolute; font-size: 40rpx; font-weight: bold; color: var(--primary); }

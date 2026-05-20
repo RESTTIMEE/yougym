@@ -1,0 +1,347 @@
+.exercise-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+}
+.exercise-img {
+  width: 360rpx;
+  height: 260rpx;
+  border-radius: var(--radius-md);
+  background: var(--bg-input);
+}
+.exercise-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--spacing-md);
+}
+
+/* 组数进度点 */
+.set-progress {
+  display: flex;
+  gap: 16rpx;
+  margin-top: var(--spacing-md);
+}
+.set-dot {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: var(--bg-input);
+  border: 3rpx solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+.set-dot.current {
+  border-color: var(--primary);
+  background: rgba(26, 86, 219, 0.08);
+}
+.set-dot.current .set-dot-num {
+  color: var(--primary);
+  font-weight: bold;
+}
+.set-dot.done {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+.set-dot.done .set-dot-num {
+  color: #fff;
+}
+.set-dot-num {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+/* 重量/次数输入 */
+.set-inputs {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+  width: 100%;
+}
+.input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.input-label {
+  font-size: 22rpx;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xs);
+}
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+}
+.adj-btn {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: var(--bg-input);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: var(--text-secondary);
+  font-weight: bold;
+}
+.adj-btn:active {
+  background: var(--primary);
+  color: #fff;
+}
+.num-input {
+  width: 100rpx;
+  height: 72rpx;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: var(--primary);
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+}
+
+/* 已完成组历史 */
+.set-history {
+  width: 100%;
+  margin-top: var(--spacing-sm);
+  padding-top: var(--spacing-sm);
+  border-top: 1rpx solid var(--border);
+}
+.history-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+  margin-top: 4rpx;
+}
+.history-tag {
+  background: rgba(26, 86, 219, 0.06);
+  border-radius: var(--radius-xl);
+  padding: 4rpx 16rpx;
+  font-size: 22rpx;
+  color: var(--primary);
+}
+
+/* 计时器 */
+.timer-section {
+  padding: var(--spacing-lg) 0;
+}
+.timer-text {
+  font-size: 80rpx;
+  font-weight: bold;
+  color: var(--primary);
+  display: block;
+  line-height: 1.2;
+}
+.timer-text.running {
+  animation: pulse 1s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* 休息倒计时 */
+.rest-section {
+  padding: var(--spacing-lg) 0;
+}
+.rest-ring {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  border: 8rpx solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  animation: ringPulse 1s ease-in-out infinite;
+}
+@keyframes ringPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,74,0.3); }
+  50% { box-shadow: 0 0 0 20rpx rgba(255,107,74,0); }
+}
+.rest-ring-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.rest-remaining {
+  font-size: 72rpx;
+  font-weight: bold;
+  color: var(--accent);
+  line-height: 1.2;
+}
+.rest-unit {
+  font-size: 28rpx;
+  color: var(--accent);
+}
+.rest-label {
+  display: block;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  margin-top: var(--spacing-sm);
+}
+.rest-adjust {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  margin-top: var(--spacing-md);
+}
+.rest-adj-btn {
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  font-size: 24rpx;
+  padding: 8rpx 24rpx;
+  border-radius: var(--radius-xl);
+}
+.rest-adj-btn:active {
+  background: var(--border);
+}
+.rest-skip-btn {
+  background: rgba(255,107,74,0.1);
+  color: var(--accent);
+  font-size: 24rpx;
+  padding: 8rpx 24rpx;
+  border-radius: var(--radius-xl);
+}
+
+/* 操作按钮 */
+.action-section {
+  padding: var(--spacing-md);
+}
+.btn {
+  width: 100%;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-accent {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* 完成页 */
+.completion-section {
+  padding: var(--spacing-md);
+}
+.complete-badge {
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: var(--accent);
+  padding: var(--spacing-xl) 0;
+}
+.summary-card {
+  padding: var(--spacing-md);
+}
+.section-title {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: var(--spacing-sm);
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-xs) 0;
+}
+.summary-exercise {
+  border-top: 1rpx solid var(--border);
+  padding-top: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+}
+.summary-sets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+  margin-top: 4rpx;
+}
+
+/* 感受评分 */
+.feeling-stars {
+  display: flex;
+  justify-content: center;
+  gap: 12rpx;
+  padding: var(--spacing-sm) 0;
+}
+.feeling-star {
+  font-size: 48rpx;
+  color: #E0E0E0;
+}
+.feeling-star.active {
+  color: #FFB800;
+}
+.notes-wrap {
+  padding: 0 var(--spacing-sm);
+}
+.notes-input {
+  width: 100%;
+  height: 80rpx;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--spacing-md);
+  box-sizing: border-box;
+}
+
+/* 底部进度 */
+.bottom-progress {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--bg-card);
+  border-top: 1rpx solid var(--border);
+}
+.progress-bar {
+  height: 6rpx;
+  background: var(--border);
+  border-radius: 3rpx;
+  overflow: hidden;
+  margin-bottom: 6rpx;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 3rpx;
+  transition: width 0.3s ease;
+}
+
+/* 训练日选择条 */
+.day-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16rpx 24rpx; background: var(--bg-card); border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+}
+.day-bar-left { display: flex; align-items: center; gap: 12rpx; }
+.day-bar-line { width: 8rpx; height: 48rpx; border-radius: 4rpx; }
+.day-bar-name { font-size: 30rpx; font-weight: bold; color: var(--text-primary); }
+.day-bar-meta { font-size: 22rpx; color: var(--text-secondary); display: block; }
+.day-bar-switch {
+  padding: 10rpx 24rpx; border: 2rpx solid var(--border); border-radius: var(--radius-xl);
+  font-size: 24rpx; color: var(--text-secondary);
+}
+.day-bar-switch.active { border-color: var(--primary); color: var(--primary); }
+
+.day-panel {
+  background: var(--bg-card); border-radius: var(--radius-md); padding: 8rpx;
+  margin-bottom: var(--spacing-md); border: 2rpx solid var(--primary);
+}
+.day-panel-item {
+  padding: 16rpx 20rpx; border-radius: var(--radius-sm);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 26rpx;
+}
+.day-panel-item.active { background: rgba(26,86,219,0.06); color: var(--primary); font-weight: bold; }

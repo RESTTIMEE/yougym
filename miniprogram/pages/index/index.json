@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "优健",
+  "usingComponents": {
+    "skeleton": "/components/skeleton/skeleton"
+  }
+}

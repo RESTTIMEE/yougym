@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "ec-canvas": "/miniprogram_npm/echarts-for-weixin/ec-canvas/ec-canvas",
+    "body-chart": "/components/body-chart/body-chart",
+    "calorie-calculator": "/components/calorie-calculator/calorie-calculator",
+    "skeleton": "/components/skeleton/skeleton"
+  },
+  "navigationBarTitleText": "数据看板"
+}

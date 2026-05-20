@@ -1,0 +1,42 @@
+<view class="heatmap-container">
+  <view class="year-nav">
+    <text class="year-arrow" bindtap="onPrevYear">◀</text>
+    <text class="year-text">{{year}}</text>
+    <text class="year-arrow" bindtap="onNextYear">▶</text>
+  </view>
+
+  <view class="legend">
+    <text class="legend-text">少</text>
+    <view class="legend-cell level-0"></view>
+    <view class="legend-cell level-1"></view>
+    <view class="legend-cell level-2"></view>
+    <view class="legend-cell level-3"></view>
+    <text class="legend-text">多</text>
+  </view>
+
+  <scroll-view scroll-x class="grid-scroll">
+    <view class="grid-wrapper">
+      <view class="month-row">
+        <text wx:for="{{monthLabels}}" wx:key="month" class="month-label" style="left: {{item.col * 28}}rpx">{{item.month + 1}}月</text>
+      </view>
+      <view class="heat-grid">
+        <view wx:for="{{[0,1,2,3,4,5,6]}}" wx:key="*this" class="heat-row">
+          <view
+            wx:for="{{weeks}}"
+            wx:for-item="week"
+            wx:key="index"
+            wx:for-index="colIndex"
+            class="heat-cell level-{{week[item].level >= 0 ? week[item].level : 'hide'}}"
+            data-date="{{week[item].date}}"
+            data-durationminutes="{{week[item].durationMinutes}}"
+            bindtap="onCellTap"
+          ></view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{showTooltip}}" class="tooltip">
+    <text>{{tooltipDate}} 训练 {{tooltipMinutes}} 分钟</text>
+  </view>
+</view>

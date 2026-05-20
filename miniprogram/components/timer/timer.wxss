@@ -1,0 +1,4 @@
+.timer { text-align: center; padding: var(--spacing-lg); }
+.timer-digits { font-size: 72rpx; font-weight: bold; color: var(--primary); }
+.timer.running .timer-digits { color: var(--warning); }
+.timer-controls { display: flex; justify-content: center; gap: var(--spacing-sm); margin-top: var(--spacing-md); }

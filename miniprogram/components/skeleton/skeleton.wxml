@@ -1,0 +1,26 @@
+<view wx:for="{{count}}" wx:key="index" class="skeleton-wrapper">
+  <block wx:if="{{type === 'card'}}">
+    <view class="skeleton skeleton-card"></view>
+  </block>
+  <block wx:elif="{{type === 'list'}}">
+    <view class="skeleton skeleton-list-row">
+      <view class="skeleton skeleton-avatar"></view>
+      <view class="skeleton-list-text">
+        <view class="skeleton skeleton-title"></view>
+        <view class="skeleton skeleton-text" style="width: 80%;"></view>
+      </view>
+    </view>
+  </block>
+  <block wx:elif="{{type === 'text'}}">
+    <view class="skeleton skeleton-text" style="width: {{index === 0 ? '60%' : (index === 1 ? '85%' : '70%')}};"></view>
+  </block>
+  <block wx:elif="{{type === 'avatar'}}">
+    <view style="display: flex; align-items: center; gap: 16rpx;">
+      <view class="skeleton skeleton-avatar"></view>
+      <view style="flex: 1;">
+        <view class="skeleton skeleton-title"></view>
+        <view class="skeleton skeleton-text" style="width: 50%;"></view>
+      </view>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,8 @@
+.form-group { padding: var(--spacing-lg); }
+.form-label { display: block; color: var(--text-secondary); margin-top: var(--spacing-md); }
+.form-input { width: 100%; height: 80rpx; background: var(--bg-input); border-radius: var(--radius-sm); padding: 0 var(--spacing-md); margin-top: var(--spacing-xs); border: 2rpx solid transparent; transition: border-color var(--transition), box-shadow var(--transition); box-sizing: border-box; }
+.form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4rpx rgba(26,86,219,0.12); background: var(--bg-card); }
+.form-input.error { border-color: var(--danger); animation: shake 0.4s ease; }
+picker { display: block; height: 80rpx; line-height: 80rpx; background: var(--bg-input); border-radius: var(--radius-sm); padding: 0 var(--spacing-md); margin-top: var(--spacing-xs); color: var(--text-primary); }
+.error-text { color: var(--danger); font-size: 22rpx; margin-top: 4rpx; }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8rpx); } 75% { transform: translateX(8rpx); } }

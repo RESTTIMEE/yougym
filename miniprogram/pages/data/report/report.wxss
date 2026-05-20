@@ -1,0 +1,19 @@
+.container { padding: var(--spacing-sm); }
+.tabs { display: flex; margin-bottom: 30rpx; }
+.tab { flex: 1; text-align: center; padding: 20rpx; font-size: 30rpx; color: var(--text-secondary); border-bottom: 4rpx solid transparent; }
+.tab.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: bold; }
+.card { background: var(--bg-card); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); display: flex; justify-content: space-between; }
+.label { color: var(--text-secondary); font-size: 28rpx; }
+.value { color: var(--text-primary); font-size: 28rpx; font-weight: bold; }
+.empty { text-align: center; color: var(--text-hint); padding: 60rpx 0; }
+.form-group { background: var(--bg-card); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 20rpx; }
+.section-title { font-size: 30rpx; font-weight: bold; color: var(--text-primary); margin-bottom: var(--spacing-sm); display: block; }
+.input { border: 1rpx solid var(--border); border-radius: var(--radius-sm); padding: var(--spacing-sm); margin-bottom: 12rpx; font-size: 28rpx; }
+.btn { background: var(--primary); color: var(--text-white); border-radius: var(--radius-sm); margin: 20rpx 0; }
+.result-card { background: var(--bg-card); border-radius: var(--radius-md); padding: var(--spacing-md); margin-top: 20rpx; }
+.result-item { display: block; font-size: 28rpx; color: var(--text-primary); margin-bottom: var(--spacing-xs); }
+.feedback { display: block; font-size: 30rpx; color: var(--primary); font-weight: bold; margin-top: var(--spacing-sm); padding-top: var(--spacing-sm); border-top: 1rpx solid var(--border); }
+.share-btn { margin-top: var(--spacing-md); background: var(--gradient-primary); color: var(--text-white); border-radius: var(--radius-xl); }
+.share-preview { padding: var(--spacing-md); text-align: center; }
+.share-image { width: 100%; border-radius: var(--radius-md); }
+.save-btn { margin-top: var(--spacing-md); background: var(--success); color: var(--text-white); border-radius: var(--radius-md); }

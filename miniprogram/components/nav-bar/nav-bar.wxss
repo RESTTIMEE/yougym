@@ -1,0 +1,3 @@
+.nav-bar { display: flex; align-items: center; justify-content: center; height: 88rpx; padding-top: 44rpx; }
+.nav-title { color: #FFF; font-size: 34rpx; font-weight: bold; }
+.back-btn { position: absolute; left: var(--spacing-md); color: #FFF; font-size: 32rpx; }

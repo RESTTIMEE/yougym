@@ -46,7 +46,7 @@ export function request<T = any>(path: string, options: RequestOptions = {}): Pr
               } else {
                 reject(new Error('Unauthorized'));
               }
-            }).catch(() => {
+            }).catch(() => { // 刷新失败由上层统一处理
               isRefreshing = false;
               refreshPromise = null;
               reject(new Error('Unauthorized'));

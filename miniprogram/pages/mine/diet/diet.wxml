@@ -1,0 +1,120 @@
+<view class="container">
+  <view class="header">
+    <picker mode="date" value="{{recordDate}}" bindchange="onDateChange">
+      <text class="date-btn">{{recordDate}}</text>
+    </picker>
+    <view class="meal-tabs">
+      <text
+        wx:for="{{mealTypes}}"
+        wx:key="value"
+        class="meal-tab {{mealType === item.value ? 'active' : ''}}"
+        bindtap="onMealTap"
+        data-value="{{item.value}}"
+      >{{item.label}}</text>
+    </view>
+  </view>
+
+  <view class="search-box">
+    <view class="search-input-wrap">
+      <text class="search-icon">🔍</text>
+      <input class="search-input" placeholder="搜索食物 (如: 鸡胸肉)" value="{{keyword}}" bindinput="onSearch" />
+    </view>
+  </view>
+
+  <view wx:if="{{searchResults.length > 0}}" class="search-results">
+    <text class="result-title">搜索结果</text>
+    <view
+      wx:for="{{searchResults}}"
+      wx:key="id"
+      class="food-item"
+      bindtap="onSelectFood"
+      data-food="{{item}}"
+    >
+      <view class="food-item-left">
+        <text class="food-name">{{item.foodName}}</text>
+        <text class="food-info">蛋白{{item.proteinG}}g | 脂肪{{item.fatG}}g | 碳水{{item.carbsG}}g</text>
+      </view>
+      <text class="food-kcal-tag">{{item.caloriesPer100g}}kcal</text>
+    </view>
+  </view>
+
+  <view wx:if="{{frequentFoods.length > 0}}" class="frequent-section">
+    <text class="frequent-title">常用食物</text>
+    <view class="frequent-list">
+      <view
+        wx:for="{{frequentFoods}}"
+        wx:key="id"
+        class="frequent-tag scale-active"
+        bindtap="onQuickAdd"
+        data-food="{{item}}"
+      >
+        <text class="frequent-name">{{item.foodName}}</text>
+        <text class="frequent-kcal">{{item.caloriesPer100g}}kcal</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="current-section">
+    <text class="section-title">当前{{mealType === 'breakfast' ? '早餐' : mealType === 'lunch' ? '午餐' : mealType === 'dinner' ? '晚餐' : '加餐'}}</text>
+    <view wx:if="{{currentItems.length === 0}}" class="empty-hint">点击上方搜索添加食物</view>
+    <view wx:for="{{currentItems}}" wx:key="foodName" class="current-item">
+      <text class="item-name">{{item.foodName}} {{item.servingAmount}}g</text>
+      <text class="item-cal">{{item.calories}}kcal</text>
+      <text class="item-del" bindtap="onRemoveItem" data-index="{{index}}">✕</text>
+    </view>
+    <view wx:if="{{currentItems.length > 0}}" class="total-row">
+      <text>合计: {{currentItems.reduce((s, i) => s + i.calories, 0)}}kcal</text>
+      <button class="submit-btn" bindtap="onSubmitRecords">保存</button>
+    </view>
+  </view>
+
+  <view class="daily-section">
+    <text class="section-title">今日饮食</text>
+    <text class="cal-total">总摄入: {{totalCalories}} / {{targetCalories}} kcal</text>
+    <view class="cal-bar-wrap">
+      <view class="cal-bar" style="width: {{totalCalories > targetCalories ? 100 : totalCalories / targetCalories * 100}}%;"></view>
+    </view>
+
+    <view class="macro-section">
+      <view class="macro-item">
+        <view class="macro-header">
+          <text class="macro-label">蛋白质</text>
+          <text class="macro-value">{{macroTotals.protein}} / {{macroTargets.protein}}g</text>
+        </view>
+        <view class="progress-bar">
+          <view class="progress-fill protein" style="width: {{macroTotals.protein > macroTargets.protein ? 100 : macroTotals.protein / macroTargets.protein * 100}}%;"></view>
+        </view>
+      </view>
+      <view class="macro-item">
+        <view class="macro-header">
+          <text class="macro-label">脂肪</text>
+          <text class="macro-value">{{macroTotals.fat}} / {{macroTargets.fat}}g</text>
+        </view>
+        <view class="progress-bar">
+          <view class="progress-fill fat" style="width: {{macroTotals.fat > macroTargets.fat ? 100 : macroTotals.fat / macroTargets.fat * 100}}%;"></view>
+        </view>
+      </view>
+      <view class="macro-item">
+        <view class="macro-header">
+          <text class="macro-label">碳水</text>
+          <text class="macro-value">{{macroTotals.carbs}} / {{macroTargets.carbs}}g</text>
+        </view>
+        <view class="progress-bar">
+          <view class="progress-fill carbs" style="width: {{macroTotals.carbs > macroTargets.carbs ? 100 : macroTotals.carbs / macroTargets.carbs * 100}}%;"></view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{groupedRecords.length === 0}}" class="empty-hint">暂无记录</view>
+    <view wx:for="{{groupedRecords}}" wx:key="mealType" class="meal-group">
+      <view class="meal-group-header">
+        <text class="meal-group-label">{{item.label}}</text>
+        <text class="meal-group-cal">{{item.subCalories}}kcal</text>
+      </view>
+      <view wx:for="{{item.items}}" wx:key="id" wx:for-item="r" class="record-item">
+        <text class="record-food">{{r.food.foodName}}</text>
+        <text class="record-amount">{{r.servingAmount}}g | {{r.food.caloriesPer100g * r.servingAmount / 100}}kcal</text>
+      </view>
+    </view>
+  </view>
+</view>

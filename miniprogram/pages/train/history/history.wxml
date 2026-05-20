@@ -1,0 +1,75 @@
+<view class="page-container">
+  <!-- 月份分组 -->
+  <block wx:for="{{groups}}" wx:key="month">
+    <view class="month-header">
+      <text class="month-label">{{item.month}}</text>
+      <text class="month-count">{{item.checkins.length}}次训练</text>
+    </view>
+
+    <view
+      wx:for="{{item.checkins}}"
+      wx:for-item="c"
+      wx:key="id"
+      class="checkin-card card scale-active"
+      data-id="{{c.id}}"
+      bindtap="onToggleExpand"
+    >
+      <!-- 摘要行 -->
+      <view class="checkin-summary">
+        <view class="checkin-left">
+          <text class="checkin-date">{{c.checkinDate.slice(8)}}</text>
+          <text class="checkin-plan text-hint">{{c.planName || '自由训练'}}{{c.trainingDayName ? ' · ' + c.trainingDayName : ''}}</text>
+        </view>
+        <view class="checkin-right">
+          <text class="checkin-duration">{{c.durationMinutes}}分钟</text>
+          <text class="checkin-feeling">{{c._emoji}}</text>
+          <text class="expand-arrow {{c._expanded ? 'open' : ''}}">▾</text>
+        </view>
+      </view>
+
+      <!-- 展开详情 -->
+      <view wx:if="{{c._expanded}}" class="checkin-detail fade-in">
+        <view class="detail-row">
+          <text class="text-hint">完成</text>
+          <text>{{c.completedSets}}组 {{c.completedReps}}次</text>
+        </view>
+        <view wx:if="{{c.notes}}" class="detail-row">
+          <text class="text-hint">备注</text>
+          <text class="notes-text">{{c.notes}}</text>
+        </view>
+
+        <!-- 逐组详情 -->
+        <view wx:if="{{c.exerciseLogs && c.exerciseLogs.length > 0}}" class="sets-table">
+          <view class="sets-header">
+            <text class="sets-col sets-col-act">动作</text>
+            <text class="sets-col sets-col-set">组</text>
+            <text class="sets-col sets-col-kg">重量</text>
+            <text class="sets-col sets-col-rep">次数</text>
+          </view>
+          <view wx:for="{{c.exerciseLogs}}" wx:for-item="log" wx:key="id" class="sets-row">
+            <text class="sets-col sets-col-act">{{log.exerciseName || '动作' + log.exerciseId}}</text>
+            <text class="sets-col sets-col-set">{{log.setNumber}}</text>
+            <text class="sets-col sets-col-kg">{{log.weight || '--'}}</text>
+            <text class="sets-col sets-col-rep">{{log.reps}}</text>
+          </view>
+        </view>
+        <view wx:else class="text-hint text-sm text-center mt-sm">无详细组数记录</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 加载更多 -->
+  <view wx:if="{{loading}}" class="load-more">
+    <text class="text-hint">加载中...</text>
+  </view>
+  <view wx:elif="{{noMore && groups.length > 0}}" class="load-more">
+    <text class="text-hint">— 没有更多了 —</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{!loading && groups.length === 0}}" class="empty-state">
+    <text class="empty-icon">📋</text>
+    <text class="text-hint">暂无训练记录</text>
+    <text class="text-hint text-sm">开始训练后记录将显示在这里</text>
+  </view>
+</view>

@@ -1,0 +1,29 @@
+.container { padding: var(--spacing-sm); }
+.points-card { background: var(--gradient-primary); border-radius: var(--radius-md); padding: var(--spacing-lg); margin-bottom: var(--spacing-md); text-align: center; box-shadow: var(--shadow-glow); }
+.points-label { font-size: 26rpx; color: rgba(255,255,255,0.8); }
+.points-value { font-size: 64rpx; font-weight: bold; color: var(--text-white); display: block; margin-top: var(--spacing-xs); transition: transform var(--transition); }
+.section-title { font-size: 30rpx; font-weight: bold; color: var(--text-primary); margin-bottom: var(--spacing-sm); display: block; }
+.achievement-grid { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); }
+.ach-card { width: calc(25% - 12rpx); background: var(--bg-card); border-radius: var(--radius-md); padding: var(--spacing-sm); text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: var(--shadow-sm); box-sizing: border-box; }
+.ach-card.unlocked { border: 2rpx solid rgba(255,215,0,0.4); }
+.ach-card.locked { opacity: 0.5; filter: grayscale(40%); }
+.ach-icon { font-size: 44rpx; margin-bottom: var(--spacing-xs); }
+.ach-name { font-size: 22rpx; color: var(--text-primary); font-weight: bold; }
+.ach-desc { font-size: 20rpx; color: var(--text-hint); margin-top: 4rpx; }
+.ach-badge { font-size: 20rpx; color: var(--success); background: var(--success-light); padding: 2rpx 10rpx; border-radius: var(--radius-sm); margin-top: 6rpx; }
+.ach-lock { font-size: 20rpx; margin-top: 6rpx; color: var(--text-disabled); }
+
+/* 入场 stagger 动画 */
+.ach-card:nth-child(1) { animation: fadeIn 0.3s ease both; }
+.ach-card:nth-child(2) { animation: fadeIn 0.3s 0.05s ease both; }
+.ach-card:nth-child(3) { animation: fadeIn 0.3s 0.1s ease both; }
+.ach-card:nth-child(4) { animation: fadeIn 0.3s 0.15s ease both; }
+.ach-card:nth-child(5) { animation: fadeIn 0.3s 0.2s ease both; }
+.ach-card:nth-child(6) { animation: fadeIn 0.3s 0.25s ease both; }
+.ach-card:nth-child(7) { animation: fadeIn 0.3s 0.3s ease both; }
+.ach-card:nth-child(8) { animation: fadeIn 0.3s 0.35s ease both; }
+.ach-card:nth-child(9) { animation: fadeIn 0.3s 0.4s ease both; }
+.ach-card:nth-child(10) { animation: fadeIn 0.3s 0.45s ease both; }
+.ach-card:nth-child(11) { animation: fadeIn 0.3s 0.5s ease both; }
+.ach-card:nth-child(12) { animation: fadeIn 0.3s 0.55s ease both; }
+.ach-card:nth-child(n+13) { animation: fadeIn 0.3s 0.6s ease both; }

@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="points-card">
+    <text class="points-label">当前积分</text>
+    <text class="points-value">{{displayPoints}}</text>
+  </view>
+
+  <text class="section-title">成就</text>
+  <view class="achievement-grid">
+    <view wx:for="{{achievements}}" wx:key="id" class="ach-card {{item.unlocked ? 'unlocked' : 'locked'}}">
+      <text class="ach-icon">{{item.icon}}</text>
+      <text class="ach-name">{{item.name}}</text>
+      <text class="ach-desc">{{item.description}}</text>
+      <text wx:if="{{item.unlocked}}" class="ach-badge">已解锁</text>
+      <text wx:else class="ach-lock">🔒</text>
+    </view>
+  </view>
+</view>

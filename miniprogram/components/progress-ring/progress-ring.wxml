@@ -1,0 +1,4 @@
+<view class="progress-ring" style="width: {{size}}rpx; height: {{size}}rpx">
+  <canvas canvas-id="{{canvasId}}" style="width: {{size}}rpx; height: {{size}}rpx"></canvas>
+  <text class="percent-text">{{percent}}%</text>
+</view>

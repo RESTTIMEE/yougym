@@ -1,0 +1,38 @@
+<view class="page-container">
+  <view class="form-group card">
+    <text class="form-label">日期</text>
+    <picker mode="date" value="{{date}}" bind:change="onDateChange">
+      <text>{{date}}</text>
+    </picker>
+
+    <text class="form-label mt-md">体重 (kg) <text class="required">*</text></text>
+    <input class="form-input {{errors.weight ? 'error' : ''}}" type="digit" placeholder="如 70.5" value="{{weight}}" bindinput="onFieldInput" data-field="weight" />
+    <text wx:if="{{errors.weight}}" class="error-text">{{errors.weight}}</text>
+
+    <text class="form-label mt-md">体脂率 (%)</text>
+    <input class="form-input {{errors.bodyFatPct ? 'error' : ''}}" type="digit" placeholder="如 18" value="{{bodyFatPct}}" bindinput="onFieldInput" data-field="bodyFatPct" />
+    <text wx:if="{{errors.bodyFatPct}}" class="error-text">{{errors.bodyFatPct}}</text>
+
+    <text class="form-label mt-md">肌肉量 (kg)</text>
+    <input class="form-input {{errors.muscleMassKg ? 'error' : ''}}" type="digit" placeholder="如 35" value="{{muscleMassKg}}" bindinput="onFieldInput" data-field="muscleMassKg" />
+    <text wx:if="{{errors.muscleMassKg}}" class="error-text">{{errors.muscleMassKg}}</text>
+
+    <text class="form-label mt-md">柔韧度评分 (1-10)</text>
+    <input class="form-input {{errors.flexibilityScore ? 'error' : ''}}" type="number" placeholder="如 6" value="{{flexibilityScore}}" bindinput="onFieldInput" data-field="flexibilityScore" />
+    <text wx:if="{{errors.flexibilityScore}}" class="error-text">{{errors.flexibilityScore}}</text>
+
+    <text class="form-label mt-md">胸围 (cm)</text>
+    <input class="form-input {{errors.chest ? 'error' : ''}}" type="digit" placeholder="选填" value="{{chest}}" bindinput="onFieldInput" data-field="chest" />
+    <text wx:if="{{errors.chest}}" class="error-text">{{errors.chest}}</text>
+
+    <text class="form-label mt-md">腰围 (cm)</text>
+    <input class="form-input {{errors.waist ? 'error' : ''}}" type="digit" placeholder="选填" value="{{waist}}" bindinput="onFieldInput" data-field="waist" />
+    <text wx:if="{{errors.waist}}" class="error-text">{{errors.waist}}</text>
+
+    <text class="form-label mt-md">臀围 (cm)</text>
+    <input class="form-input {{errors.hip ? 'error' : ''}}" type="digit" placeholder="选填" value="{{hip}}" bindinput="onFieldInput" data-field="hip" />
+    <text wx:if="{{errors.hip}}" class="error-text">{{errors.hip}}</text>
+  </view>
+
+  <button class="btn-primary mt-lg" bind:tap="onSubmit">保存记录</button>
+</view>

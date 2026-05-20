@@ -1,0 +1,22 @@
+.container { padding: var(--spacing-sm); }
+.upload-section { width: 100%; height: 500rpx; background: var(--bg-card); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 20rpx; border: 2rpx dashed var(--border); animation: borderPulse 2s ease-in-out infinite; }
+@keyframes borderPulse { 0%, 100% { border-color: var(--border); } 50% { border-color: var(--primary); opacity: 0.7; } }
+.placeholder { display: flex; flex-direction: column; align-items: center; }
+.ph-icon { font-size: 80rpx; margin-bottom: 12rpx; }
+.ph-text { font-size: 28rpx; color: var(--text-hint); }
+.preview { width: 100%; height: 500rpx; }
+.desc-input { width: 100%; height: 120rpx; background: var(--bg-card); border-radius: var(--radius-md); padding: var(--spacing-sm); font-size: 28rpx; margin-bottom: 20rpx; box-sizing: border-box; border: 1rpx solid var(--border); }
+.submit-btn { width: 100%; height: 88rpx; line-height: 88rpx; background: var(--gradient-primary); color: var(--text-white); font-size: 30rpx; border-radius: var(--radius-xl); margin-bottom: 30rpx; }
+.result-section { background: var(--bg-card); border-radius: var(--radius-md); padding: 20rpx; }
+.result-header { display: flex; align-items: center; margin-bottom: 20rpx; }
+.result-type { font-size: 36rpx; font-weight: bold; color: var(--text-primary); margin-right: var(--spacing-sm); }
+.result-severity { padding: 6rpx var(--spacing-sm); border-radius: var(--radius-sm); font-size: 24rpx; }
+.result-severity.normal { background: var(--success-light); color: var(--success); }
+.result-severity.warn { background: var(--warning-light); color: var(--warning); }
+.section-title { font-size: 28rpx; font-weight: bold; color: var(--text-primary); margin-bottom: 12rpx; display: block; }
+.plan-card { background: var(--bg-input); border-radius: var(--radius-sm); padding: var(--spacing-sm); margin-bottom: 12rpx; }
+.plan-name { font-size: 28rpx; color: var(--text-primary); font-weight: bold; display: block; margin-bottom: var(--spacing-xs); }
+.plan-meta { display: flex; gap: var(--spacing-sm); margin-bottom: 6rpx; }
+.plan-freq { font-size: 24rpx; color: var(--primary); }
+.plan-dur { font-size: 24rpx; color: var(--text-secondary); }
+.plan-notes { font-size: 24rpx; color: var(--text-hint); }

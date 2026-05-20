@@ -1,0 +1,48 @@
+<view class="container">
+  <view class="tabs">
+    <text class="tab {{activeTab === 'training' ? 'active' : ''}}" bindtap="onTabTap" data-tab="training">训练建议</text>
+    <text class="tab {{activeTab === 'diet' ? 'active' : ''}}" bindtap="onTabTap" data-tab="diet">饮食建议</text>
+  </view>
+
+  <!-- Streaming output -->
+  <view wx:if="{{streaming}}" class="stream-container">
+    <view wx:if="{{streamText}}" class="stream-text">{{streamText}}<text class="cursor {{streamCursor ? 'blink' : ''}}">|</text></view>
+    <view wx:else class="stream-loading">
+      <view class="dot-pulse"></view>
+      <text class="stream-hint">AI 思考中...</text>
+    </view>
+  </view>
+
+  <!-- Training advice results -->
+  <view wx:elif="{{activeTab === 'training' && trainingAdvice.length > 0}}" class="content fade-in">
+    <view wx:for="{{trainingAdvice}}" wx:key="index" class="advice-card">
+      <text class="advice-num">{{index + 1}}</text>
+      <text class="advice-text">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- Diet advice results -->
+  <view wx:elif="{{activeTab === 'diet' && dietEvaluation}}" class="content fade-in">
+    <view class="eval-card">
+      <text class="eval-label">AI 评价</text>
+      <text class="eval-text">{{dietEvaluation}}</text>
+    </view>
+    <view wx:if="{{dietSuggestions.length > 0}}" class="suggestions">
+      <text class="section-label">改进建议</text>
+      <view wx:for="{{dietSuggestions}}" wx:key="index" class="advice-card">
+        <text class="advice-num">{{index + 1}}</text>
+        <text class="advice-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Empty state -->
+  <view wx:else class="empty-state">
+    <text class="empty-text">点击「刷新」获取 AI 建议</text>
+  </view>
+
+  <view wx:if="{{generatedAt}}" class="footer-info">
+    <text class="gen-time">生成时间: {{generatedAt}}</text>
+    <button class="refresh-btn scale-active" bindtap="onRefresh" size="mini" disabled="{{streaming}}">刷新</button>
+  </view>
+</view>

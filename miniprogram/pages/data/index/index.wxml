@@ -1,0 +1,43 @@
+<view class="container">
+  <!-- 骨架加载 -->
+  <block wx:if="{{loading}}">
+    <view class="p-md">
+      <skeleton type="card"></skeleton>
+      <view class="mt-md"></view>
+      <skeleton type="card"></skeleton>
+      <view class="mt-md"></view>
+      <skeleton type="list"></skeleton>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="chart-section">
+      <view class="chart-title">体重 & BMI 趋势</view>
+      <ec-canvas id="weightBmiChart" canvas-id="weightBmiChart" ec="{{weightBmiChart}}" />
+    </view>
+
+    <view class="chart-section">
+      <view class="chart-title">体脂率趋势</view>
+      <ec-canvas id="bodyFatChart" canvas-id="bodyFatChart" ec="{{bodyFatChart}}" />
+    </view>
+
+    <view class="chart-section">
+      <body-chart records="{{bodyRecords}}" metric="waist" title="腰围趋势" />
+      <body-chart records="{{bodyRecords}}" metric="chest" title="胸围趋势" />
+      <body-chart records="{{bodyRecords}}" metric="hip" title="臀围趋势" />
+    </view>
+
+    <view class="chart-section">
+      <view class="chart-title">食物营养查询</view>
+      <calorie-calculator />
+    </view>
+
+    <view class="quick-actions">
+      <button class="btn scale-active" bindtap="goToBody">录入身体数据</button>
+      <view class="btn-divider"></view>
+      <button class="btn scale-active" bindtap="goToReport" data-type="cycle">查看训练报告</button>
+      <view class="btn-divider"></view>
+      <button class="btn scale-active" bindtap="goToHistory">训练记录</button>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,55 @@
+<view class="container">
+  <view class="tabs">
+    <view class="tab {{activeTab === 'cycle' ? 'active' : ''}}" bindtap="switchTab" data-tab="cycle">周期报告</view>
+    <view class="tab {{activeTab === 'monthly' ? 'active' : ''}}" bindtap="switchTab" data-tab="monthly">月度报告</view>
+  </view>
+
+  <!-- 周期报告 -->
+  <view wx:if="{{activeTab === 'cycle'}}" class="report-section">
+    <block wx:if="{{cycleReport}}">
+      <view class="card"><text class="label">计划</text><text class="value">{{cycleReport.planName}}</text></view>
+      <view class="card"><text class="label">周期天数</text><text class="value">{{cycleReport.cycleDays}}天</text></view>
+      <view class="card"><text class="label">打卡天数</text><text class="value">{{cycleReport.totalDays}}天</text></view>
+      <view class="card"><text class="label">总训练时长</text><text class="value">{{cycleReport.totalDurationMinutes}}分钟</text></view>
+      <view class="card"><text class="label">平均感受</text><text class="value">{{cycleReport.avgFeelingRating}}/5</text></view>
+      <button class="share-btn scale-active" bindtap="generateShareCard">生成分享卡片</button>
+    </block>
+    <block wx:else>
+      <view class="empty">暂无训练记录，请先完成训练打卡</view>
+    </block>
+  </view>
+
+  <!-- 月度报告 -->
+  <view wx:if="{{activeTab === 'monthly'}}" class="report-section">
+    <view class="form-group">
+      <text class="section-title">月初数据</text>
+      <input class="input" placeholder="体重(kg) 必填" value="{{startWeight}}" bindinput="onFieldInput" data-field="startWeight" type="digit" />
+      <input class="input" placeholder="胸围(cm)" value="{{startChest}}" bindinput="onFieldInput" data-field="startChest" type="digit" />
+      <input class="input" placeholder="腰围(cm)" value="{{startWaist}}" bindinput="onFieldInput" data-field="startWaist" type="digit" />
+      <input class="input" placeholder="臀围(cm)" value="{{startHip}}" bindinput="onFieldInput" data-field="startHip" type="digit" />
+    </view>
+    <view class="form-group">
+      <text class="section-title">月末数据</text>
+      <input class="input" placeholder="体重(kg) 必填" value="{{endWeight}}" bindinput="onFieldInput" data-field="endWeight" type="digit" />
+      <input class="input" placeholder="胸围(cm)" value="{{endChest}}" bindinput="onFieldInput" data-field="endChest" type="digit" />
+      <input class="input" placeholder="腰围(cm)" value="{{endWaist}}" bindinput="onFieldInput" data-field="endWaist" type="digit" />
+      <input class="input" placeholder="臀围(cm)" value="{{endHip}}" bindinput="onFieldInput" data-field="endHip" type="digit" />
+    </view>
+    <button class="btn" bindtap="calcMonthly">计算变化</button>
+
+    <view wx:if="{{monthlyResult}}" class="result-card">
+      <text class="result-item">体重变化：{{monthlyResult.changes.weight}}kg</text>
+      <text wx:if="{{monthlyResult.changes.chest !== undefined}}" class="result-item">胸围变化：{{monthlyResult.changes.chest}}cm</text>
+      <text wx:if="{{monthlyResult.changes.waist !== undefined}}" class="result-item">腰围变化：{{monthlyResult.changes.waist}}cm</text>
+      <text wx:if="{{monthlyResult.changes.hip !== undefined}}" class="result-item">臀围变化：{{monthlyResult.changes.hip}}cm</text>
+      <text class="feedback">{{monthlyResult.feedback}}</text>
+    </view>
+  </view>
+
+  <!-- 分享卡片 Canvas (隐藏) -->
+  <canvas type="2d" canvas-id="shareCanvas" id="shareCanvas" style="position:fixed; left:9999rpx; top:9999rpx; width:600rpx; height:800rpx;"></canvas>
+  <view wx:if="{{shareImagePath}}" class="share-preview">
+    <image src="{{shareImagePath}}" mode="widthFix" class="share-image" />
+    <button class="save-btn scale-active" bindtap="saveToAlbum">保存到相册</button>
+  </view>
+</view>

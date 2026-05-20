@@ -1,0 +1,8 @@
+<view class="timer {{isRunning ? 'running' : ''}}">
+  <text class="timer-digits">{{currentTime}}s</text>
+  <view class="timer-controls">
+    <button wx:if="{{!isRunning}}" size="mini" bind:tap="start">开始</button>
+    <button wx:else size="mini" bind:tap="stop">暂停</button>
+    <button size="mini" bind:tap="reset">重置</button>
+  </view>
+</view>

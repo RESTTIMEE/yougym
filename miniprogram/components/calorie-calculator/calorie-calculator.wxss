@@ -1,0 +1,33 @@
+.calculator { background: var(--bg-card); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-md); }
+.search-row { display: flex; align-items: center; }
+.search-input { flex: 1; background: var(--bg-input); border-radius: var(--radius-sm); padding: 16rpx 20rpx; font-size: 28rpx; }
+.clear-btn { font-size: 32rpx; color: var(--text-hint); padding: 8rpx 0 8rpx 16rpx; }
+
+.search-status { text-align: center; padding: 20rpx 0; }
+
+.results { margin-top: 12rpx; background: var(--bg-input); border-radius: var(--radius-sm); max-height: 360rpx; overflow-y: auto; }
+.food-item { display: flex; justify-content: space-between; align-items: center; padding: 16rpx 20rpx; border-bottom: 1rpx solid var(--border-light); }
+.food-item-left { flex: 1; }
+.food-name { font-size: 28rpx; color: var(--text-primary); }
+.food-sub { font-size: 22rpx; color: var(--text-hint); display: block; margin-top: 4rpx; }
+.food-kcal { font-size: 26rpx; color: var(--accent); font-weight: bold; }
+.no-result { text-align: center; padding: 30rpx 0; }
+
+.result-card { margin-top: 20rpx; border-top: 1rpx solid var(--border); padding-top: 20rpx; }
+.result-header { margin-bottom: 16rpx; }
+.result-name { font-size: 32rpx; font-weight: bold; color: var(--text-primary); }
+.result-per100 { font-size: 24rpx; color: var(--text-hint); margin-left: 12rpx; }
+
+.amount-row { display: flex; align-items: center; margin-bottom: 24rpx; }
+.amount-label { font-size: 26rpx; color: var(--text-secondary); margin-right: 12rpx; }
+.amount-input { width: 100rpx; text-align: center; background: var(--bg-input); border-radius: var(--radius-sm); padding: 10rpx; font-size: 28rpx; font-weight: bold; color: var(--primary); }
+.amount-unit { font-size: 26rpx; color: var(--text-secondary); margin-left: 8rpx; }
+
+.macro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16rpx; }
+.macro-item { text-align: center; background: var(--bg-input); border-radius: var(--radius-sm); padding: 20rpx 12rpx; }
+.macro-num { font-size: 36rpx; font-weight: bold; color: var(--text-primary); display: block; }
+.macro-num.protein { color: #3B82F6; }
+.macro-num.fat { color: #F59E0B; }
+.macro-num.carbs { color: #8B5CF6; }
+.macro-unit { font-size: 22rpx; color: var(--text-hint); }
+.macro-tag { font-size: 22rpx; color: var(--text-secondary); display: block; margin-top: 4rpx; }
