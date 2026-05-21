@@ -89,7 +89,6 @@ Page({
         hip: this.data.hip ? Number(this.data.hip) : undefined,
         muscleMassKg: this.data.muscleMassKg ? Number(this.data.muscleMassKg) : undefined,
         flexibilityScore: this.data.flexibilityScore ? Number(this.data.flexibilityScore) : undefined,
-        bmi: 0,
         recordDate: this.data.date,
       });
       wx.hideLoading();

@@ -8,6 +8,6 @@ export class AddBodyRecordDto {
   @IsOptional() @IsNumber() @Min(50) @Max(200) chest?: number;
   @IsOptional() @IsNumber() @Min(50) @Max(200) waist?: number;
   @IsOptional() @IsNumber() @Min(50) @Max(200) hip?: number;
-  @IsOptional() @IsNumber() @Min(10) @Max(50) bmi?: number;
+  @IsOptional() @IsNumber() bmi?: number;
   @IsDateString() recordDate: string;
 }

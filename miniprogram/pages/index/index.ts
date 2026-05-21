@@ -100,12 +100,4 @@ Page({
     wx.switchTab({ url: '/pages/data/index/index' });
   },
 
-  onAiAdvice() {
-    wx.vibrateShort({ type: 'light' });
-    wx.navigateTo({ url: '/pages/ai/advice/advice' });
-  },
-  onPosture() {
-    wx.vibrateShort({ type: 'light' });
-    wx.navigateTo({ url: '/pages/ai/posture/posture' });
-  },
 });

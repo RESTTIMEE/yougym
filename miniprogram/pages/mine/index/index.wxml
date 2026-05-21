@@ -10,12 +10,12 @@
   </view>
 
   <!-- 隐私同意 -->
-  <view class="privacy-agree" wx:if="{{!isLogin}}">
-    <checkbox checked="{{privacyAgreed}}" bindchange="togglePrivacy" />
+  <view class="privacy-agree" wx:if="{{!isLogin}}" bindtap="togglePrivacy">
+    <checkbox checked="{{privacyAgreed}}" />
     <text>我已阅读并同意</text>
-    <text class="link" bindtap="goPrivacy">《隐私政策》</text>
+    <text class="link" catchtap="goPrivacy">《隐私政策》</text>
     <text>和</text>
-    <text class="link" bindtap="goAgreement">《用户服务协议》</text>
+    <text class="link" catchtap="goAgreement">《用户服务协议》</text>
   </view>
 
   <!-- 菜单 -->

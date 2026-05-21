@@ -1,0 +1,15 @@
+{
+  "name": "yougym",
+  "version": "0.1.0",
+  "description": "优健 - 个性化健身训练指导小程序",
+  "private": true,
+  "scripts": {
+    "server:dev": "cd server && npm run start:dev",
+    "server:build": "cd server && npm run build",
+    "server:test": "cd server && npm run test",
+    "server:lint": "cd server && npm run lint"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

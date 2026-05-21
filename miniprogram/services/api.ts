@@ -18,11 +18,13 @@ let refreshPromise: Promise<string | null> | null = null;
 export function request<T = any>(path: string, options: RequestOptions = {}): Promise<T> {
   const { method = 'GET', data, header = {} } = options;
   const token = wx.getStorageSync('accessToken') || '';
+  const fullUrl = `${BASE_URL}${path}`;
 
   return new Promise((resolve, reject) => {
     const doRequest = (authToken: string) => {
+      console.log('[API]', method, fullUrl);
       wx.request({
-        url: `${BASE_URL}${path}`,
+        url: fullUrl,
         method,
         data,
         header: {
@@ -32,8 +34,8 @@ export function request<T = any>(path: string, options: RequestOptions = {}): Pr
         },
         success(res) {
           const { statusCode, data: resp } = res;
+          console.log('[API]', statusCode, method, fullUrl);
           if (statusCode === 401) {
-            // Try refresh
             if (!isRefreshing) {
               isRefreshing = true;
               refreshPromise = authApi.refresh();
@@ -42,11 +44,11 @@ export function request<T = any>(path: string, options: RequestOptions = {}): Pr
               isRefreshing = false;
               refreshPromise = null;
               if (newToken) {
-                doRequest(newToken); // Retry original request
+                doRequest(newToken);
               } else {
                 reject(new Error('Unauthorized'));
               }
-            }).catch(() => { // 刷新失败由上层统一处理
+            }).catch(() => {
               isRefreshing = false;
               refreshPromise = null;
               reject(new Error('Unauthorized'));
@@ -56,10 +58,12 @@ export function request<T = any>(path: string, options: RequestOptions = {}): Pr
           if (statusCode && statusCode >= 200 && statusCode < 300) {
             resolve(resp as T);
           } else {
+            console.error('[API] 响应错误:', statusCode, method, fullUrl, resp);
             reject(new Error(`请求失败: ${statusCode}`));
           }
         },
         fail(err) {
+          console.error('[API] 网络失败:', method, fullUrl, JSON.stringify(err));
           wx.showToast({ title: '网络异常，请稍后重试', icon: 'none' });
           reject(err);
         },

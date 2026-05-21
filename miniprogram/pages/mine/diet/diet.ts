@@ -18,6 +18,7 @@ Page({
     currentItems: [] as any[],
     dailyRecords: [] as any[],
     frequentFoods: [] as any[],
+    currentTotalCalories: 0,
     totalCalories: 0,
     targetCalories: 2000,
     macroTotals: { protein: 0, fat: 0, carbs: 0 },
@@ -47,6 +48,11 @@ Page({
     } catch (_) { /* 使用默认值回退 */ }
   },
 
+  updateCurrentTotal() {
+    const total = this.data.currentItems.reduce((s: number, i: any) => s + i.calories, 0);
+    this.setData({ currentTotalCalories: total });
+  },
+
   onQuickAdd(e: WechatMiniprogram.TouchEvent) {
     const food = e.currentTarget.dataset.food;
     wx.showModal({
@@ -61,6 +67,7 @@ Page({
           this.setData({
             currentItems: [...this.data.currentItems, { ...food, servingAmount: grams, calories }],
           });
+          this.updateCurrentTotal();
         }
       },
     });
@@ -113,6 +120,7 @@ Page({
             searchResults: [],
             keyword: '',
           });
+          this.updateCurrentTotal();
         }
       },
     });
@@ -123,6 +131,7 @@ Page({
     const items = [...this.data.currentItems];
     items.splice(index, 1);
     this.setData({ currentItems: items });
+    this.updateCurrentTotal();
   },
 
   async onSubmitRecords() {
@@ -142,7 +151,7 @@ Page({
       });
       wx.hideLoading();
       wx.showToast({ title: '记录成功', icon: 'success' });
-      this.setData({ currentItems: [] });
+      this.setData({ currentItems: [], currentTotalCalories: 0 });
       this.loadDailyRecords();
     } catch (_) {
       wx.hideLoading();

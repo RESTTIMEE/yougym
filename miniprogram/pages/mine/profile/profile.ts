@@ -20,6 +20,10 @@ Page({
     restOptions: [30, 60, 90, 120],
     restIndex: 1,
     errors: {} as ProfileErrors,
+    bmi: 0,
+    bmiCategory: '',
+    bmiColor: '',
+    bmiBarWidth: 0,
   },
 
   onShow() {
@@ -33,6 +37,7 @@ Page({
         restIndex: restIdx >= 0 ? restIdx : 1,
         errors: {},
       });
+      this.calcBMI();
     }
   },
 
@@ -45,6 +50,7 @@ Page({
       errors.height = '';
     }
     this.setData({ 'profile.height': val, errors });
+    this.calcBMI();
   },
 
   onWeightInput(e: WechatMiniprogram.Input) {
@@ -56,6 +62,26 @@ Page({
       errors.weight = '';
     }
     this.setData({ 'profile.weight': val, errors });
+    this.calcBMI();
+  },
+
+  calcBMI() {
+    const h = this.data.profile.height;
+    const w = this.data.profile.weight;
+    if (h && w && h > 0 && w > 0) {
+      const heightM = h / 100;
+      const bmi = Math.round((w / (heightM * heightM)) * 10) / 10;
+      let cat = '';
+      let color = '';
+      if (bmi < 18.5) { cat = '偏瘦'; color = '#F59E0B'; }
+      else if (bmi < 24) { cat = '正常'; color = '#34A853'; }
+      else if (bmi < 28) { cat = '偏重'; color = '#F97316'; }
+      else { cat = '肥胖'; color = '#EF4444'; }
+      const barWidth = Math.min(100, Math.max(0, ((bmi - 10) / 30) * 100));
+      this.setData({ bmi, bmiCategory: cat, bmiColor: color, bmiBarWidth: barWidth });
+    } else {
+      this.setData({ bmi: 0, bmiCategory: '', bmiColor: '', bmiBarWidth: 0 });
+    }
   },
 
   onGenderChange(e: WechatMiniprogram.PickerChange) {

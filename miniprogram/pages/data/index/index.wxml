@@ -12,18 +12,10 @@
 
   <block wx:else>
     <view class="chart-section">
-      <view class="chart-title">体重 & BMI 趋势</view>
-      <ec-canvas id="weightBmiChart" canvas-id="weightBmiChart" ec="{{weightBmiChart}}" />
-    </view>
-
-    <view class="chart-section">
-      <view class="chart-title">体脂率趋势</view>
-      <ec-canvas id="bodyFatChart" canvas-id="bodyFatChart" ec="{{bodyFatChart}}" />
-    </view>
-
-    <view class="chart-section">
-      <body-chart records="{{bodyRecords}}" metric="waist" title="腰围趋势" />
+      <body-chart records="{{bodyRecords}}" metric="weight" title="体重趋势" />
+      <body-chart records="{{bodyRecords}}" metric="bodyFatPct" title="体脂率趋势" />
       <body-chart records="{{bodyRecords}}" metric="chest" title="胸围趋势" />
+      <body-chart records="{{bodyRecords}}" metric="waist" title="腰围趋势" />
       <body-chart records="{{bodyRecords}}" metric="hip" title="臀围趋势" />
     </view>
 

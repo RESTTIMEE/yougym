@@ -63,7 +63,7 @@
       <text class="item-del" bindtap="onRemoveItem" data-index="{{index}}">✕</text>
     </view>
     <view wx:if="{{currentItems.length > 0}}" class="total-row">
-      <text>合计: {{currentItems.reduce((s, i) => s + i.calories, 0)}}kcal</text>
+      <text>合计: {{currentTotalCalories}}kcal</text>
       <button class="submit-btn scale-active" bindtap="onSubmitRecords">保存</button>
     </view>
   </view>

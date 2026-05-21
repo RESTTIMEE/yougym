@@ -82,7 +82,7 @@ Component({
 
         this.setData({ ecReady: true });
         return chart;
-      });
+      }, echarts);
     },
   },
 });

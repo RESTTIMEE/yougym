@@ -4,11 +4,11 @@ import { BASE_URL } from '../utils/constants';
 
 export const authApi = {
   async login(code: string) {
-    const res = await post<{ accessToken: string; refreshToken: string; user: UserProfile }>('/auth/login', { code });
-    if (res.accessToken) {
-      userStore.setLogin(res.accessToken, res.refreshToken, res.user);
+    const res = await post<ApiResponse<{ accessToken: string; refreshToken: string; user: UserProfile }>>('/auth/login', { code });
+    if (res.data?.accessToken) {
+      userStore.setLogin(res.data.accessToken, res.data.refreshToken, res.data.user);
     }
-    return res;
+    return res.data;
   },
 
   async logout(refreshToken: string): Promise<void> {
@@ -41,8 +41,10 @@ export const authApi = {
           data: { refreshToken },
           header: { 'Content-Type': 'application/json' },
           success: (r) => {
-            if (r.statusCode === 200) resolve(r.data as any);
-            else reject(new Error('Refresh failed'));
+            if (r.statusCode === 200) {
+              const body = r.data as any;
+              resolve(body.data || body);
+            } else reject(new Error('Refresh failed'));
           },
           fail: reject,
         });
