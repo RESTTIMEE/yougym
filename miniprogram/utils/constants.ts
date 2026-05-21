@@ -6,17 +6,20 @@ const API_URLS: Record<string, string> = {
   release: 'https://api.yougym.com/api/v1',
 };
 
-// 真机调试：电脑开热点时设为 true，手机连接同一热点
-const USE_LAN_IP = false;
+// 真机调试：非 devtools 平台 + develop 环境 → 自动使用局域网 IP
+// 电脑开启移动热点，手机连接同一热点即可调试
 const LAN_URL = 'http://192.168.137.1:3000/api/v1';
 
 let env = 'develop';
+let isDevtools = true;
 try {
   env = wx.getAccountInfoSync().miniProgram.envVersion;
+  isDevtools = wx.getSystemInfoSync().platform === 'devtools';
 } catch {
 }
+const USE_LAN_IP = env === 'develop' && !isDevtools;
 export const BASE_URL = USE_LAN_IP ? LAN_URL : (API_URLS[env] || API_URLS.develop);
-console.log('[YouGym] env:', env, 'USE_LAN_IP:', USE_LAN_IP, 'BASE_URL:', BASE_URL);
+console.log('[YouGym] env:', env, 'platform:', isDevtools ? 'devtools' : 'device', 'BASE_URL:', BASE_URL);
 
 /** 健身目标枚举 */
 export const FITNESS_GOAL_MAP = {
